@@ -39,12 +39,17 @@ export default function ListItems() {
   return (
     <List>
       <Divider />
-      <ListItem button>
-        <ListItemIcon>
-          <DashboardIcon />
-        </ListItemIcon>
-        <ListItemText primary="Dashboard" />
-      </ListItem>
+      <Link
+        to="/dashboard"
+        style={{ color: "inherit", textDecoration: "none" }}
+      >
+        <ListItem button>
+          <ListItemIcon>
+            <DashboardIcon />
+          </ListItemIcon>
+          <ListItemText primary="Dashboard" />
+        </ListItem>
+      </Link>
       <ListItem button onClick={handleClick}>
         <ListItemIcon>
           <InboxIcon />
@@ -55,7 +60,7 @@ export default function ListItems() {
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
           <Link
-            to="/commission/Meesho"
+            to="/dashboard/commission/Meesho"
             style={{ color: "inherit", textDecoration: "none" }}
           >
             <ListItem button className={classes.nested}>

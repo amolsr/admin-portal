@@ -7,16 +7,16 @@ import Table from "./components/table";
 
 function App() {
   return (
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
       <Switch>
+        <Route path="/dashboard/commission/:platform">
+          <Dashboard>
+            <Table />
+          </Dashboard>
+        </Route>
         <Route path="/dashboard">
           <Dashboard>
             <Main />
-          </Dashboard>
-        </Route>
-        <Route path="/commission/:platform">
-          <Dashboard>
-            <Table />
           </Dashboard>
         </Route>
         <Route path="/" component={SignIn} />
