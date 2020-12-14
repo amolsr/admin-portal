@@ -1,20 +1,29 @@
 {
   "files": {
     "main.css": "/admin-portal/static/css/main.ab7136cd.chunk.css",
-    "main.js": "/admin-portal/static/js/main.4734f86d.chunk.js",
-    "main.js.map": "/admin-portal/static/js/main.4734f86d.chunk.js.map",
-    "runtime-main.js": "/admin-portal/static/js/runtime-main.09777ea4.js",
-    "runtime-main.js.map": "/admin-portal/static/js/runtime-main.09777ea4.js.map",
-    "static/js/2.8dd280cc.chunk.js": "/admin-portal/static/js/2.8dd280cc.chunk.js",
-    "static/js/2.8dd280cc.chunk.js.map": "/admin-portal/static/js/2.8dd280cc.chunk.js.map",
+    "main.js": "/admin-portal/static/js/main.daa87bc1.chunk.js",
+    "main.js.map": "/admin-portal/static/js/main.daa87bc1.chunk.js.map",
+    "runtime-main.js": "/admin-portal/static/js/runtime-main.82d117b0.js",
+    "runtime-main.js.map": "/admin-portal/static/js/runtime-main.82d117b0.js.map",
+    "static/js/2.e771260c.chunk.js": "/admin-portal/static/js/2.e771260c.chunk.js",
+    "static/js/2.e771260c.chunk.js.map": "/admin-portal/static/js/2.e771260c.chunk.js.map",
+    "static/js/3.45a79cc8.chunk.js": "/admin-portal/static/js/3.45a79cc8.chunk.js",
+    "static/js/3.45a79cc8.chunk.js.map": "/admin-portal/static/js/3.45a79cc8.chunk.js.map",
+    "static/js/4.1e61430d.chunk.js": "/admin-portal/static/js/4.1e61430d.chunk.js",
+    "static/js/4.1e61430d.chunk.js.map": "/admin-portal/static/js/4.1e61430d.chunk.js.map",
+    "static/js/5.a327347c.chunk.js": "/admin-portal/static/js/5.a327347c.chunk.js",
+    "static/js/5.a327347c.chunk.js.map": "/admin-portal/static/js/5.a327347c.chunk.js.map",
     "index.html": "/admin-portal/index.html",
     "static/css/main.ab7136cd.chunk.css.map": "/admin-portal/static/css/main.ab7136cd.chunk.css.map",
-    "static/js/2.8dd280cc.chunk.js.LICENSE.txt": "/admin-portal/static/js/2.8dd280cc.chunk.js.LICENSE.txt"
+    "static/js/2.e771260c.chunk.js.LICENSE.txt": "/admin-portal/static/js/2.e771260c.chunk.js.LICENSE.txt",
+    "static/js/3.45a79cc8.chunk.js.LICENSE.txt": "/admin-portal/static/js/3.45a79cc8.chunk.js.LICENSE.txt",
+    "static/js/4.1e61430d.chunk.js.LICENSE.txt": "/admin-portal/static/js/4.1e61430d.chunk.js.LICENSE.txt",
+    "static/js/5.a327347c.chunk.js.LICENSE.txt": "/admin-portal/static/js/5.a327347c.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.09777ea4.js",
-    "static/js/2.8dd280cc.chunk.js",
+    "static/js/runtime-main.82d117b0.js",
+    "static/js/3.45a79cc8.chunk.js",
     "static/css/main.ab7136cd.chunk.css",
-    "static/js/main.4734f86d.chunk.js"
+    "static/js/main.daa87bc1.chunk.js"
   ]
 }
