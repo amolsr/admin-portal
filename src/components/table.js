@@ -3,10 +3,9 @@ import { useParams } from "react-router-dom";
 
 export default function Table(props) {
   let params = useParams();
-  console.log(params);
   return (
     <MaterialTable
-      title="Multiple Actions Preview"
+      title={params.platform}
       columns={[
         { title: "Name", field: "name" },
         { title: "Surname", field: "surname" },

@@ -6,6 +6,7 @@ import Drawer from "@material-ui/core/Drawer";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
 import IconButton from "@material-ui/core/IconButton";
 import Container from "@material-ui/core/Container";
@@ -13,6 +14,7 @@ import Container from "@material-ui/core/Container";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import SideNav from "./sideNav";
+import { Link } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -134,6 +136,18 @@ export default function Dashboard(props) {
           >
             4posper
           </Typography>
+
+          <Link
+            to=""
+            style={{
+              color: "inherit",
+              textDecoration: "none",
+            }}
+          >
+            <IconButton color="inherit">
+              <ExitToAppIcon />
+            </IconButton>
+          </Link>
         </Toolbar>
       </AppBar>
       <Drawer

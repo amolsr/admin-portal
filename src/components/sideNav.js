@@ -1,137 +1,213 @@
 import React from "react";
-
+import PropTypes from "prop-types";
+import DashboardIcon from "@material-ui/icons/Dashboard";
+import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
+import StarBorder from "@material-ui/icons/StarBorder";
 import ListItemText from "@material-ui/core/ListItemText";
-import DashboardIcon from "@material-ui/icons/Dashboard";
-import Divider from "@material-ui/core/Divider";
-
-import { makeStyles } from "@material-ui/core/styles";
-
-import List from "@material-ui/core/List";
-
 import Collapse from "@material-ui/core/Collapse";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
+
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
-import StarBorder from "@material-ui/icons/StarBorder";
+
+import Divider from "@material-ui/core/Divider";
+import { withStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 
-const useStyles = makeStyles((theme) => ({
+const styles = (theme) => ({
   root: {
     width: "100%",
     maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
+    background: theme.palette.background.paper,
   },
   nested: {
     paddingLeft: theme.spacing(4),
   },
-}));
+});
 
-export default function ListItems() {
-  const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
+function getItems() {
+  var json = [
+    {
+      id: 1,
+      title: "Dashboard",
+      link: "/dashboard",
+    },
+    {
+      id: 2,
+      title: "Meesho",
+      items: [
+        {
+          id: 1,
+          name: "Commission",
+          link: "/dashboard/commission/Meesho",
+        },
+      ],
+    },
+    {
+      id: 3,
+      title: "Club Factory",
+      items: [
+        {
+          id: 1,
+          name: "Commission",
+          link: "/dashboard/commission/ClubFactory",
+        },
+        {
+          id: 2,
+          name: "Shipping",
+          link: "/dashboard/shipping/ClubFactory",
+        },
+      ],
+    },
+    {
+      id: 4,
+      title: "Flipkart",
+      items: [
+        {
+          id: 1,
+          name: "Commission",
+          link: "/dashboard/commission/Flipkart",
+        },
+        {
+          id: 2,
+          name: "Shipping",
+          link: "/dashboard/shipping/Flipkart",
+        },
+        {
+          id: 3,
+          name: "Fixed Fees",
+          link: "/dashboard/fixedfees/Flipkart",
+        },
+        {
+          id: 4,
+          name: "Collection Fees",
+          link: "/dashboard/collectionfees/Flipkart",
+        },
+      ],
+    },
+  ];
 
-  const handleClick = () => {
-    setOpen(!open);
-  };
-
-  return (
-    <List>
-      <Divider />
-      <Link
-        to="/dashboard"
-        style={{ color: "inherit", textDecoration: "none" }}
-      >
-        <ListItem button>
-          <ListItemIcon>
-            <DashboardIcon />
-          </ListItemIcon>
-          <ListItemText primary="Dashboard" />
-        </ListItem>
-      </Link>
-      <ListItem button onClick={handleClick}>
-        <ListItemIcon>
-          <InboxIcon />
-        </ListItemIcon>
-        <ListItemText primary="Meesho" />
-        {open ? <ExpandLess /> : <ExpandMore />}
-      </ListItem>
-      <Collapse in={open} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
-          <Link
-            to="/dashboard/commission/Meesho"
-            style={{ color: "inherit", textDecoration: "none" }}
-          >
-            <ListItem button className={classes.nested}>
-              <ListItemIcon>
-                <StarBorder />
-              </ListItemIcon>
-              <ListItemText primary="Commission" />
-            </ListItem>
-          </Link>
-        </List>
-      </Collapse>
-    </List>
-  );
+  return json;
 }
-
-// const mainListItems = (
-//   <div>
-//     <ListSubheader inset>Club Factory</ListSubheader>
-//     <ListItem button>
-//       <ListItemIcon>
-//         <AssignmentIcon />
-//       </ListItemIcon>
-//       <ListItemText primary="Commission" />
-//     </ListItem>
-//     <ListItem button>
-//       <ListItemIcon>
-//         <AssignmentIcon />
-//       </ListItemIcon>
-//       <ListItemText primary="Commission" />
-//     </ListItem>
-//     <Divider />
-//     <ListSubheader inset>Flipkart</ListSubheader>
-//     <ListItem button>
-//       <ListItemIcon>
-//         <AssignmentIcon />
-//       </ListItemIcon>
-//       <ListItemText primary="Commission" />
-//     </ListItem>
-//     <ListItem button>
-//       <ListItemIcon>
-//         <AssignmentIcon />
-//       </ListItemIcon>
-//       <ListItemText primary="Commission" />
-//     </ListItem>
-//     <ListItem button>
-//       <ListItemIcon>
-//         <AssignmentIcon />
-//       </ListItemIcon>
-//       <ListItemText primary="Commission" />
-//     </ListItem>
-//     <ListItem button>
-//       <ListItemIcon>
-//         <AssignmentIcon />
-//       </ListItemIcon>
-//       <ListItemText primary="Commission" />
-//     </ListItem>
-//     <Divider />
-//     <ListSubheader inset>Amazon</ListSubheader>
-//     <ListItem button>
-//       <ListItemIcon>
-//         <AssignmentIcon />
-//       </ListItemIcon>
-//       <ListItemText primary="Commission" />
-//     </ListItem>
-//     <Divider />
-//     <ListSubheader inset>Amazon FBA</ListSubheader>
-//     <ListItem button>
-//       <ListItemIcon>
-//         <AssignmentIcon />
-//       </ListItemIcon>
-//       <ListItemText primary="Commission" />
-//     </ListItem>
-//   </div>
-// );
+class NestedList extends React.Component {
+  state = {};
+  handleClick = (e) => {
+    this.setState({ [e]: !this.state[e] });
+  };
+  render() {
+    const items = getItems();
+    const { classes } = this.props;
+    return (
+      <>
+        <Divider />
+        <List className={classes.root}>
+          {items.map((item) => {
+            return (
+              <div key={item.id}>
+                {item.items != null ? (
+                  <ListItem
+                    button
+                    key={item.id}
+                    onClick={this.handleClick.bind(this, item.title)}
+                  >
+                    <ListItemIcon>
+                      <DashboardIcon />
+                    </ListItemIcon>
+                    <ListItemText primary={item.title} />
+                    {item.items != null ? (
+                      <div>
+                        {this.state[item.title] ? (
+                          <ExpandLess />
+                        ) : (
+                          <ExpandMore />
+                        )}
+                      </div>
+                    ) : (
+                      ""
+                    )}
+                  </ListItem>
+                ) : (
+                  <Link
+                    to={item.link}
+                    style={{
+                      color: "inherit",
+                      textDecoration: "none",
+                    }}
+                  >
+                    <ListItem
+                      button
+                      key={item.id}
+                      onClick={this.handleClick.bind(this, item.title)}
+                    >
+                      <ListItemIcon>
+                        <DashboardIcon />
+                      </ListItemIcon>
+                      <ListItemText primary={item.title} />
+                      {item.items != null ? (
+                        <div>
+                          {this.state[item.title] ? (
+                            <ExpandLess />
+                          ) : (
+                            <ExpandMore />
+                          )}
+                        </div>
+                      ) : (
+                        ""
+                      )}
+                    </ListItem>
+                  </Link>
+                )}
+                {item.items != null ? (
+                  <div key={item.id}>
+                    <Collapse
+                      key={items.id}
+                      component="li"
+                      in={this.state[item.title]}
+                      timeout="auto"
+                      unmountOnExit
+                    >
+                      <List disablePadding>
+                        {item.items.map((sitem) => {
+                          return (
+                            <Link
+                              to={sitem.link}
+                              style={{
+                                color: "inherit",
+                                textDecoration: "none",
+                              }}
+                            >
+                              <ListItem
+                                button
+                                key={sitem.id}
+                                className={classes.nested}
+                              >
+                                <ListItemIcon>
+                                  <StarBorder />
+                                </ListItemIcon>
+                                <ListItemText
+                                  key={sitem.id}
+                                  primary={sitem.name}
+                                />
+                              </ListItem>
+                            </Link>
+                          );
+                        })}
+                      </List>
+                    </Collapse>{" "}
+                  </div>
+                ) : (
+                  " "
+                )}
+              </div>
+            );
+          })}
+        </List>
+      </>
+    );
+  }
+}
+NestedList.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+export default withStyles(styles)(NestedList);
