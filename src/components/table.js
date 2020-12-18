@@ -1,8 +1,21 @@
 import MaterialTable from "material-table";
 import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setAlert } from "../actions/alert";
 
 export default function Table(props) {
   let params = useParams();
+
+  const dispatch = useDispatch();
+
+  const handleClick = () => {
+    var form = {
+      set: true,
+      fields: ["commission", "category"],
+    };
+    dispatch(setAlert(true, "Add Commision", form));
+  };
+  // date = new Date(parseInt(_id.toString().substring(0, 8), 16) * 1000);
   return (
     <MaterialTable
       title={params.platform}
@@ -41,7 +54,7 @@ export default function Table(props) {
           icon: "add",
           tooltip: "Add User",
           isFreeAction: true,
-          onClick: (event) => alert("You want to add a new row"),
+          onClick: (event) => handleClick(),
         },
       ]}
       options={{

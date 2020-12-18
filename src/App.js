@@ -14,6 +14,21 @@ function App() {
             <Table />
           </Dashboard>
         </Route>
+        <Route path="/dashboard/shipping/:platform">
+          <Dashboard>
+            <Table />
+          </Dashboard>
+        </Route>
+        <Route path="/dashboard/fixedfees/:platform">
+          <Dashboard>
+            <Table />
+          </Dashboard>
+        </Route>
+        <Route path="/dashboard/collectionfees/:platform">
+          <Dashboard>
+            <Table />
+          </Dashboard>
+        </Route>
         <Route path="/dashboard">
           <Dashboard>
             <Main />

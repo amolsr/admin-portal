@@ -15,6 +15,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import SideNav from "./sideNav";
 import { Link } from "react-router-dom";
+import TransitionsModal from "./modal";
 
 const drawerWidth = 240;
 
@@ -170,6 +171,7 @@ export default function Dashboard(props) {
           {props.children}
         </Container>
       </main>
+      <TransitionsModal />
     </div>
   );
 }
