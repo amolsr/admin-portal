@@ -1,62 +1,26 @@
-import axios from "axios";
 import { setAlert } from "./alert";
-import { AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL } from "./types";
+import { LOGIN_SUCCESS, LOGIN_FAIL } from "./types";
 import setAuthToken from "../utils/setAuthToken";
 
-// Load User
-export const loadUser = () => async (dispatch) => {
-  if (localStorage.token) {
-    setAuthToken(localStorage.token);
-  }
-
-  try {
-    console.log("doing req");
-    const res = await axios.get("/api/auth");
-    console.log("got res");
-
-    dispatch({
-      type: USER_LOADED,
-      payload: res.data,
-    });
-  } catch (err) {
-    dispatch({ type: AUTH_ERROR });
-  }
-};
-
 // Login User
-export const login = (email, password) => async (dispatch) => {
-  const config = {
+export const login = (pin) => async (dispatch) => {
+  fetch(process.env.REACT_APP_API_URL + "/api/MPC/admin/login", {
+    method: "POST",
     headers: {
-      "Content-Type": "application/json",
+      "content-type": "application/json",
     },
-  };
-
-  const body = JSON.stringify({ email, password });
-
-  try {
-    const res = await axios.post("/api/auth", body, config);
-    console.log(res.data);
-
-    dispatch({
-      type: LOGIN_SUCCESS,
-      payload: res.data,
+    body: JSON.stringify({ id: pin }),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      if (data.message === "loggedIn") {
+        dispatch({
+          type: LOGIN_SUCCESS,
+        });
+      } else {
+        dispatch({
+          type: LOGIN_FAIL,
+        });
+      }
     });
-    dispatch(loadUser());
-  } catch (err) {
-    const errors = err.response.data.errors;
-
-    if (errors) {
-      errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
-    }
-
-    dispatch({
-      type: LOGIN_FAIL,
-    });
-  }
-};
-
-// Logout / Clear Profile
-export const logout = () => (dispatch) => {
-  dispatch({ type: CLEAR_PROFILE });
-  dispatch({ type: LOGOUT });
 };

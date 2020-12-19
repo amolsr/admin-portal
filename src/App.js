@@ -11,22 +11,22 @@ function App() {
       <Switch>
         <Route path="/dashboard/commission/:platform">
           <Dashboard>
-            <Table />
+            <Table type="Commission" />
           </Dashboard>
         </Route>
         <Route path="/dashboard/shipping/:platform">
           <Dashboard>
-            <Table />
+            <Table type="Shipping" />
           </Dashboard>
         </Route>
         <Route path="/dashboard/fixedfees/:platform">
           <Dashboard>
-            <Table />
+            <Table type="Fixed Fees" />
           </Dashboard>
         </Route>
         <Route path="/dashboard/collectionfees/:platform">
           <Dashboard>
-            <Table />
+            <Table type="Collection Fees" />
           </Dashboard>
         </Route>
         <Route path="/dashboard">

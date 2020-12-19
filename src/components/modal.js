@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import { useDispatch, useSelector } from "react-redux";
-import { setAlert } from "../actions/alert";
+import { removeAlert } from "../actions/alert";
 import { useSpring, animated } from "react-spring/web.cjs"; // web.cjs is required for IE 11 support
 import Form from "./form";
 
@@ -66,7 +66,7 @@ export default function TransitionsModal() {
   const alert = useSelector((state) => state.alert);
 
   const handleClose = () => {
-    dispatch(setAlert(false));
+    dispatch(removeAlert());
   };
 
   return (
@@ -85,7 +85,9 @@ export default function TransitionsModal() {
       >
         <Fade in={alert.set}>
           <div className={classes.paper}>
-            <h2 id="transition-modal-title">{alert.title}</h2>
+            <h2 id="transition-modal-title">
+              {alert.form.type + " " + alert.form.page}
+            </h2>
             <p id="transition-modal-description">
               {alert.form.set ? <Form /> : <></>}
             </p>
