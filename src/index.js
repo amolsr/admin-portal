@@ -7,6 +7,8 @@ import store from "./store";
 import { ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import theme from "./theme";
+import { ToastContainer, Slide } from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -14,6 +16,18 @@ ReactDOM.render(
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <App />
+        <ToastContainer
+          className="impct-toast"
+          position="bottom-right"
+          autoClose={3000}
+          newestOnTop
+          closeOnClick
+          rtl={false}
+          pauseOnVisibilityChange
+          draggable={false}
+          pauseOnHover
+          transition={Slide}
+        />
       </ThemeProvider>
     </Provider>
   </React.StrictMode>,

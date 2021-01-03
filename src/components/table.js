@@ -31,15 +31,15 @@ export default function Table(props) {
       data={table.data}
       actions={[
         {
-          icon: "save",
-          tooltip: "Save User",
-          onClick: (event, rowData) => alert("You saved " + rowData.name),
+          icon: "edit",
+          tooltip: "Update Commission",
+          onClick: (event, rowData) => alert("You Update " + rowData.category),
         },
         {
           icon: "delete",
-          tooltip: "Delete User",
+          tooltip: "Delete Commission",
           onClick: (event, rowData) =>
-            alert("You want to delete " + rowData.name),
+            alert("You want to delete " + rowData.category),
         },
         {
           icon: "add",

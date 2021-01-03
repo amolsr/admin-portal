@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import { SET_DATA, REMOVE_DATA } from "./types";
 
 export const setData = (platform, type) => (dispatch) => {
@@ -16,14 +17,21 @@ export const setData = (platform, type) => (dispatch) => {
       "/admin/commission/getAll";
   }
   fetch(url)
-    .then((res) => res.json())
+    .then(async function (response) {
+      console.log(response.status);
+      if (!response.ok) {
+        let data = await response.json();
+        throw new Error(data.message);
+      }
+      return response.json();
+    })
     .then((data) => {
-      console.log(data);
       dispatch({
         type: SET_DATA,
         payload: { column, data },
       });
-    });
+    })
+    .catch((err) => toast.error(err.message));
 };
 export const removeData = () => (dispatch) => {
   dispatch({
