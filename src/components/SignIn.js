@@ -8,8 +8,7 @@ import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import { login } from "../actions/auth";
-import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -46,14 +45,34 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignInSide(props) {
   const classes = useStyles();
-  const dispatch = useDispatch();
   const [id, setId] = useState("7300707372");
   const handleChange = (event) => {
     setId(event.target.value);
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(login(id));
+    fetch(process.env.REACT_APP_API_URL + "api/MPC/admin/login", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ id: id }),
+    })
+      .then(async function (response) {
+        console.log(response.status);
+        if (!response.ok) {
+          let data = await response.json();
+          throw new Error(data.message);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        toast.success(data.message);
+        props.history.push("./dashboard");
+      })
+      .catch((err) => {
+        toast.error(err);
+      });
   };
   return (
     <Grid container component="main" className={classes.root}>
