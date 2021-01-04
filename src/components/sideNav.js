@@ -93,7 +93,6 @@ function getItems() {
 class NestedList extends React.Component {
   state = {};
   handleClick = (e) => {
-    console.log(this.state);
     this.setState({ [e]: !this.state[e] });
   };
   componentDidMount() {

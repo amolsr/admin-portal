@@ -1,6 +1,7 @@
 import { Button, makeStyles, TextField } from "@material-ui/core";
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -11,34 +12,32 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Form() {
+export default function Form(props) {
   const classes = useStyles();
   const alert = useSelector((state) => state.alert);
-
+  const [fields, setFields] = useState({});
   const createUI = () => {
     return alert.form.fields.map((el, i) => (
       <div key={i}>
         <TextField
           name={el}
-          id="outlined-basic"
           label={el.charAt(0).toUpperCase() + el.substr(1).toLowerCase()}
           variant="outlined"
-          onChange={handleChange(this, i)}
+          value={fields[el]}
+          onChange={handleChange}
         />
         <br />
       </div>
     ));
   };
 
-  const handleChange = (i, event) => {
-    // let values = [...this.state.values];
-    // values[i] = event.target.value;
-    // this.setState({ values });
+  const handleChange = (e) => {
+    setFields({ ...fields, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (event) => {
-    alert("A name was submitted: " + this.state.values.join(", "));
     event.preventDefault();
+    toast.error(fields + " " + props.action + " " + props.product);
   };
 
   return (
@@ -50,8 +49,8 @@ export default function Form() {
     >
       {createUI()}
 
-      <Button variant="contained" color="primary">
-        Primary
+      <Button type="submit" variant="contained" color="primary">
+        Submit
       </Button>
     </form>
   );

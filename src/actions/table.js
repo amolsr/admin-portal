@@ -56,10 +56,10 @@ export const setData = (platform, type) => (dispatch) => {
     column = [
       { title: "Min", field: "minSp" },
       { title: "Max", field: "maxSp" },
-      { title: "postPaidPercentage", field: "postPaidPercentage" },
-      { title: "postPaidRuppee", field: "postPaidRuppee" },
-      { title: "prePaidPercentage", field: "prePaidPercentage" },
-      { title: "prePaidRuppee", field: "prePaidRuppee" },
+      { title: "Post Paid %", field: "postPaidPercentage" },
+      { title: "Post Paid \u20B9", field: "postPaidRuppee" },
+      { title: "Pre Paid %", field: "prePaidPercentage" },
+      { title: "Pre Paid \u20B9", field: "prePaidRuppee" },
     ];
     url =
       process.env.REACT_APP_API_URL +

@@ -89,7 +89,11 @@ export default function TransitionsModal() {
               {alert.form.type + " " + alert.form.page}
             </h2>
             <p id="transition-modal-description">
-              {alert.form.set ? <Form /> : <></>}
+              {alert.form.set ? (
+                <Form action={alert.form.type} product={alert.form.page} />
+              ) : (
+                <></>
+              )}
             </p>
           </div>
         </Fade>
