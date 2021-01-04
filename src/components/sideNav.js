@@ -13,7 +13,7 @@ import ExpandMore from "@material-ui/icons/ExpandMore";
 
 import Divider from "@material-ui/core/Divider";
 import { withStyles } from "@material-ui/core/styles";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
 const styles = (theme) => ({
   root: {
@@ -93,8 +93,19 @@ function getItems() {
 class NestedList extends React.Component {
   state = {};
   handleClick = (e) => {
+    console.log(this.state);
     this.setState({ [e]: !this.state[e] });
   };
+  componentDidMount() {
+    if (this.props.match.params.platform) {
+      var result = this.props.match.params.platform
+        .replace(/([A-Z])/g, " $1")
+        .trim();
+      this.setState({
+        [result]: !this.state[this.props.match.params.platform],
+      });
+    }
+  }
   render() {
     const items = getItems();
     const { classes } = this.props;
@@ -210,4 +221,4 @@ class NestedList extends React.Component {
 NestedList.propTypes = {
   classes: PropTypes.object.isRequired,
 };
-export default withStyles(styles)(NestedList);
+export default withStyles(styles)(withRouter(NestedList));

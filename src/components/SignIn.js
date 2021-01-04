@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -49,6 +49,10 @@ export default function SignInSide(props) {
   const handleChange = (event) => {
     setId(event.target.value);
   };
+  useEffect(() => {
+    localStorage.removeItem("token");
+  }, []);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     fetch(process.env.REACT_APP_API_URL + "api/MPC/admin/login", {
@@ -59,7 +63,6 @@ export default function SignInSide(props) {
       body: JSON.stringify({ id: id }),
     })
       .then(async function (response) {
-        console.log(response.status);
         if (!response.ok) {
           let data = await response.json();
           throw new Error(data.message);
@@ -68,10 +71,11 @@ export default function SignInSide(props) {
       })
       .then((data) => {
         toast.success(data.message);
+        localStorage.setItem("token", data["x-auth"]);
         props.history.push("./dashboard");
       })
       .catch((err) => {
-        toast.error(err);
+        toast.error(err.message);
       });
   };
   return (

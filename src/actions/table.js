@@ -16,12 +16,71 @@ export const setData = (platform, type) => (dispatch) => {
       platform +
       "/admin/commission/getAll";
   }
-  fetch(url)
+  if (type === "Shipping") {
+    if (platform === "ClubFactory") {
+      column = [
+        { title: "Type", field: "type" },
+        { title: "Region", field: "region" },
+        { title: "Min", field: "min" },
+        { title: "Max", field: "max" },
+      ];
+    }
+    if (platform === "Flipkart") {
+      column = [
+        { title: "Type", field: "type" },
+        { title: "Local", field: "local" },
+        { title: "Zonal", field: "zonal" },
+        { title: "National", field: "national" },
+      ];
+    }
+
+    url =
+      process.env.REACT_APP_API_URL +
+      "api/MPC/" +
+      platform +
+      "/admin/outwardShipping/getAll";
+  }
+  if (type === "Fixed Fees") {
+    column = [
+      { title: "Min", field: "minSp" },
+      { title: "Max", field: "maxSp" },
+      { title: "Range", field: "rate" },
+    ];
+    url =
+      process.env.REACT_APP_API_URL +
+      "api/MPC/" +
+      platform +
+      "/admin/fixedFees/getAll";
+  }
+  if (type === "Collection Fees") {
+    column = [
+      { title: "Min", field: "minSp" },
+      { title: "Max", field: "maxSp" },
+      { title: "postPaidPercentage", field: "postPaidPercentage" },
+      { title: "postPaidRuppee", field: "postPaidRuppee" },
+      { title: "prePaidPercentage", field: "prePaidPercentage" },
+      { title: "prePaidRuppee", field: "prePaidRuppee" },
+    ];
+    url =
+      process.env.REACT_APP_API_URL +
+      "api/MPC/" +
+      platform +
+      "/admin/collectionFees/getAll";
+  }
+  fetch(url, {
+    method: "GET",
+    headers: {
+      "content-type": "application/json",
+      "x-auth": localStorage.getItem("token"),
+    },
+  })
     .then(async function (response) {
-      console.log(response.status);
-      if (!response.ok) {
+      if (!response.ok && parseInt(response.status) !== 401) {
         let data = await response.json();
         throw new Error(data.message);
+      }
+      if (parseInt(response.status) === 401) {
+        localStorage.removeItem("token");
       }
       return response.json();
     })
