@@ -1,32 +1,32 @@
 {
   "files": {
     "main.css": "/admin-portal/static/css/main.ab7136cd.chunk.css",
-    "main.js": "/admin-portal/static/js/main.76cc1025.chunk.js",
-    "main.js.map": "/admin-portal/static/js/main.76cc1025.chunk.js.map",
-    "runtime-main.js": "/admin-portal/static/js/runtime-main.84d981a1.js",
-    "runtime-main.js.map": "/admin-portal/static/js/runtime-main.84d981a1.js.map",
+    "main.js": "/admin-portal/static/js/main.ad67df8d.chunk.js",
+    "main.js.map": "/admin-portal/static/js/main.ad67df8d.chunk.js.map",
+    "runtime-main.js": "/admin-portal/static/js/runtime-main.40d550b1.js",
+    "runtime-main.js.map": "/admin-portal/static/js/runtime-main.40d550b1.js.map",
     "static/css/2.24192d93.chunk.css": "/admin-portal/static/css/2.24192d93.chunk.css",
-    "static/js/2.433fa98c.chunk.js": "/admin-portal/static/js/2.433fa98c.chunk.js",
-    "static/js/2.433fa98c.chunk.js.map": "/admin-portal/static/js/2.433fa98c.chunk.js.map",
-    "static/js/3.1caafeed.chunk.js": "/admin-portal/static/js/3.1caafeed.chunk.js",
-    "static/js/3.1caafeed.chunk.js.map": "/admin-portal/static/js/3.1caafeed.chunk.js.map",
-    "static/js/4.08b53f81.chunk.js": "/admin-portal/static/js/4.08b53f81.chunk.js",
-    "static/js/4.08b53f81.chunk.js.map": "/admin-portal/static/js/4.08b53f81.chunk.js.map",
-    "static/js/5.3b58d3d7.chunk.js": "/admin-portal/static/js/5.3b58d3d7.chunk.js",
-    "static/js/5.3b58d3d7.chunk.js.map": "/admin-portal/static/js/5.3b58d3d7.chunk.js.map",
+    "static/js/2.78a7e1d1.chunk.js": "/admin-portal/static/js/2.78a7e1d1.chunk.js",
+    "static/js/2.78a7e1d1.chunk.js.map": "/admin-portal/static/js/2.78a7e1d1.chunk.js.map",
+    "static/js/3.3d491547.chunk.js": "/admin-portal/static/js/3.3d491547.chunk.js",
+    "static/js/3.3d491547.chunk.js.map": "/admin-portal/static/js/3.3d491547.chunk.js.map",
+    "static/js/4.9fab04f1.chunk.js": "/admin-portal/static/js/4.9fab04f1.chunk.js",
+    "static/js/4.9fab04f1.chunk.js.map": "/admin-portal/static/js/4.9fab04f1.chunk.js.map",
+    "static/js/5.e4fd9d47.chunk.js": "/admin-portal/static/js/5.e4fd9d47.chunk.js",
+    "static/js/5.e4fd9d47.chunk.js.map": "/admin-portal/static/js/5.e4fd9d47.chunk.js.map",
     "index.html": "/admin-portal/index.html",
     "static/css/2.24192d93.chunk.css.map": "/admin-portal/static/css/2.24192d93.chunk.css.map",
     "static/css/main.ab7136cd.chunk.css.map": "/admin-portal/static/css/main.ab7136cd.chunk.css.map",
-    "static/js/2.433fa98c.chunk.js.LICENSE.txt": "/admin-portal/static/js/2.433fa98c.chunk.js.LICENSE.txt",
-    "static/js/3.1caafeed.chunk.js.LICENSE.txt": "/admin-portal/static/js/3.1caafeed.chunk.js.LICENSE.txt",
-    "static/js/4.08b53f81.chunk.js.LICENSE.txt": "/admin-portal/static/js/4.08b53f81.chunk.js.LICENSE.txt",
-    "static/js/5.3b58d3d7.chunk.js.LICENSE.txt": "/admin-portal/static/js/5.3b58d3d7.chunk.js.LICENSE.txt"
+    "static/js/2.78a7e1d1.chunk.js.LICENSE.txt": "/admin-portal/static/js/2.78a7e1d1.chunk.js.LICENSE.txt",
+    "static/js/3.3d491547.chunk.js.LICENSE.txt": "/admin-portal/static/js/3.3d491547.chunk.js.LICENSE.txt",
+    "static/js/4.9fab04f1.chunk.js.LICENSE.txt": "/admin-portal/static/js/4.9fab04f1.chunk.js.LICENSE.txt",
+    "static/js/5.e4fd9d47.chunk.js.LICENSE.txt": "/admin-portal/static/js/5.e4fd9d47.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.84d981a1.js",
+    "static/js/runtime-main.40d550b1.js",
     "static/css/2.24192d93.chunk.css",
-    "static/js/2.433fa98c.chunk.js",
+    "static/js/2.78a7e1d1.chunk.js",
     "static/css/main.ab7136cd.chunk.css",
-    "static/js/main.76cc1025.chunk.js"
+    "static/js/main.ad67df8d.chunk.js"
   ]
 }
