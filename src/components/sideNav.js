@@ -40,7 +40,7 @@ function getItems() {
         {
           id: 1,
           name: "Commission",
-          link: "/dashboard/commission/Meesho",
+          link: "/dashboard/commission/meesho",
         },
       ],
     },
@@ -51,12 +51,12 @@ function getItems() {
         {
           id: 1,
           name: "Commission",
-          link: "/dashboard/commission/ClubFactory",
+          link: "/dashboard/commission/clubFactory",
         },
         {
           id: 2,
           name: "Shipping",
-          link: "/dashboard/shipping/ClubFactory",
+          link: "/dashboard/shipping/clubFactory",
         },
       ],
     },
@@ -67,22 +67,22 @@ function getItems() {
         {
           id: 1,
           name: "Commission",
-          link: "/dashboard/commission/Flipkart",
+          link: "/dashboard/commission/flipkart",
         },
         {
           id: 2,
           name: "Shipping",
-          link: "/dashboard/shipping/Flipkart",
+          link: "/dashboard/shipping/flipkart",
         },
         {
           id: 3,
           name: "Fixed Fees",
-          link: "/dashboard/fixedfees/Flipkart",
+          link: "/dashboard/fixedfees/flipkart",
         },
         {
           id: 4,
           name: "Collection Fees",
-          link: "/dashboard/collectionfees/Flipkart",
+          link: "/dashboard/collectionfees/flipkart",
         },
       ],
     },

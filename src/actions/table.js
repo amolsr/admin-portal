@@ -1,15 +1,44 @@
 import { toast } from "react-toastify";
+import {
+  addCommission,
+  updateCommission,
+  deleteCommission,
+} from "./commission";
 import { SET_DATA, REMOVE_DATA } from "./types";
 
 export const setData = (platform, type) => (dispatch) => {
   let column = [];
+  let editable = {};
   let url = "";
   console.log(platform + " " + type);
   if (type === "Commission") {
     column = [
-      { title: "Category", field: "category" },
+      { title: "Category", field: "category", editable: "onAdd" },
       { title: "Commission", field: "commission" },
     ];
+    editable = {
+      onRowAdd: (newData) =>
+        new Promise((resolve, reject) => {
+          setTimeout(() => {
+            dispatch(addCommission(newData, platform));
+            resolve();
+          }, 1000);
+        }),
+      onRowUpdate: (newData, oldData) =>
+        new Promise((resolve, reject) => {
+          setTimeout(() => {
+            dispatch(updateCommission(oldData, newData, platform));
+            resolve();
+          }, 1000);
+        }),
+      onRowDelete: (oldData) =>
+        new Promise((resolve, reject) => {
+          setTimeout(() => {
+            dispatch(deleteCommission(oldData, platform));
+            resolve();
+          }, 1000);
+        }),
+    };
     url =
       process.env.REACT_APP_API_URL +
       "api/MPC/" +
@@ -17,7 +46,7 @@ export const setData = (platform, type) => (dispatch) => {
       "/admin/commission/getAll";
   }
   if (type === "Shipping") {
-    if (platform === "ClubFactory") {
+    if (platform === "clubFactory") {
       column = [
         { title: "Type", field: "type" },
         { title: "Region", field: "region" },
@@ -25,7 +54,7 @@ export const setData = (platform, type) => (dispatch) => {
         { title: "Max", field: "max" },
       ];
     }
-    if (platform === "Flipkart") {
+    if (platform === "flipkart") {
       column = [
         { title: "Type", field: "type" },
         { title: "Local", field: "local" },
@@ -33,7 +62,30 @@ export const setData = (platform, type) => (dispatch) => {
         { title: "National", field: "national" },
       ];
     }
+    editable = {
+      onRowAdd: (newData) =>
+        new Promise((resolve, reject) => {
+          setTimeout(() => {
+            console.log(JSON.stringify(newData));
+            // setData([...table.data, newData]);
 
+            resolve();
+          }, 1000);
+        }),
+      onRowUpdate: (newData, oldData) =>
+        new Promise((resolve, reject) => {
+          setTimeout(() => {
+            // const dataUpdate = [...table.data];
+            // const index = oldData.tableData.id;
+            // dataUpdate[index] = newData;
+            // setData([...dataUpdate]);
+            console.log(
+              JSON.stringify(newData) + " " + JSON.stringify(oldData)
+            );
+            resolve();
+          }, 1000);
+        }),
+    };
     url =
       process.env.REACT_APP_API_URL +
       "api/MPC/" +
@@ -67,6 +119,7 @@ export const setData = (platform, type) => (dispatch) => {
       platform +
       "/admin/collectionFees/getAll";
   }
+  console.log(url);
   fetch(url, {
     method: "GET",
     headers: {
@@ -87,7 +140,7 @@ export const setData = (platform, type) => (dispatch) => {
     .then((data) => {
       dispatch({
         type: SET_DATA,
-        payload: { column, data },
+        payload: { column, data, editable },
       });
     })
     .catch((err) => toast.error(err.message));
