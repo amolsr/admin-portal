@@ -1,7 +1,7 @@
 import { Button, makeStyles, TextField } from "@material-ui/core";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -13,6 +13,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Form(props) {
+  const dispatch = useDispatch();
+  let params = useParams();
   const classes = useStyles();
   const alert = useSelector((state) => state.alert);
   const [fields, setFields] = useState({});
@@ -37,7 +39,7 @@ export default function Form(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    toast.error(fields + " " + props.action + " " + props.product);
+    dispatch(alert.form.onSubmit(fields, params.platform));
   };
 
   return (

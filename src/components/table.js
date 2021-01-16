@@ -21,6 +21,7 @@ export default function Table(props) {
       columns={table.column}
       data={table.data}
       editable={table.editable}
+      actions={table.actions}
       options={{
         paging: false,
         actionsColumnIndex: -1,

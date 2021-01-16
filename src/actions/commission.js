@@ -1,4 +1,5 @@
 import { toast } from "react-toastify";
+import { removeAlert } from "./alert";
 import { ADD_PRODUCT, DELETE_PRODUCT, UPDATE_PRODUCT } from "./types";
 
 export const addCommission = (newProduct, platform) => (dispatch) => {
@@ -34,6 +35,7 @@ export const addCommission = (newProduct, platform) => (dispatch) => {
           newProduct,
         },
       });
+      dispatch(removeAlert());
     })
     .catch((err) => {
       toast.error(err.message);
@@ -76,7 +78,6 @@ export const deleteCommission = (oldProduct, platform) => (dispatch) => {
     .catch((err) => {
       toast.error(err.message);
     });
-  console.log(JSON.stringify(oldProduct));
 };
 
 export const updateCommission = (oldProduct, newProduct, platform) => (
@@ -119,5 +120,4 @@ export const updateCommission = (oldProduct, newProduct, platform) => (
     .catch((err) => {
       toast.error(err.message);
     });
-  console.log(JSON.stringify(oldProduct) + " " + JSON.stringify(newProduct));
 };

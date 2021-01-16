@@ -4,11 +4,14 @@ import {
   updateCommission,
   deleteCommission,
 } from "./commission";
+import { addShipping, updateShipping } from "./shipping";
+import { setAlert } from "./alert";
 import { SET_DATA, REMOVE_DATA } from "./types";
 
 export const setData = (platform, type) => (dispatch) => {
   let column = [];
   let editable = {};
+  let actions = [];
   let url = "";
   console.log(platform + " " + type);
   if (type === "Commission") {
@@ -16,14 +19,29 @@ export const setData = (platform, type) => (dispatch) => {
       { title: "Category", field: "category", editable: "onAdd" },
       { title: "Commission", field: "commission" },
     ];
+    var form = {
+      set: true,
+      type: "Add",
+      page: type,
+      fields: ["category", "commission"],
+      onSubmit: addCommission,
+    };
+
+    actions = [
+      {
+        icon: "add",
+        tooltip: "Add User",
+        isFreeAction: true,
+        onClick: (event) =>
+          new Promise((resolve, reject) => {
+            setTimeout(() => {
+              dispatch(setAlert(true, form));
+              resolve();
+            }, 1000);
+          }),
+      },
+    ];
     editable = {
-      onRowAdd: (newData) =>
-        new Promise((resolve, reject) => {
-          setTimeout(() => {
-            dispatch(addCommission(newData, platform));
-            resolve();
-          }, 1000);
-        }),
       onRowUpdate: (newData, oldData) =>
         new Promise((resolve, reject) => {
           setTimeout(() => {
@@ -66,22 +84,14 @@ export const setData = (platform, type) => (dispatch) => {
       onRowAdd: (newData) =>
         new Promise((resolve, reject) => {
           setTimeout(() => {
-            console.log(JSON.stringify(newData));
-            // setData([...table.data, newData]);
-
+            dispatch(addShipping(newData, platform));
             resolve();
           }, 1000);
         }),
       onRowUpdate: (newData, oldData) =>
         new Promise((resolve, reject) => {
           setTimeout(() => {
-            // const dataUpdate = [...table.data];
-            // const index = oldData.tableData.id;
-            // dataUpdate[index] = newData;
-            // setData([...dataUpdate]);
-            console.log(
-              JSON.stringify(newData) + " " + JSON.stringify(oldData)
-            );
+            dispatch(updateShipping(oldData, newData, platform));
             resolve();
           }, 1000);
         }),
@@ -140,7 +150,7 @@ export const setData = (platform, type) => (dispatch) => {
     .then((data) => {
       dispatch({
         type: SET_DATA,
-        payload: { column, data, editable },
+        payload: { column, data, editable, actions },
       });
     })
     .catch((err) => toast.error(err.message));

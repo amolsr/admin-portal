@@ -10,6 +10,7 @@ const initialState = {
   column: [],
   data: [],
   editable: {},
+  actions: [],
 };
 
 const tableReducer = function (state = initialState, action) {
@@ -22,7 +23,7 @@ const tableReducer = function (state = initialState, action) {
     case ADD_PRODUCT:
       return {
         ...state,
-        data: [...state.data, action.payload.newProduct],
+        data: [action.payload.newProduct, ...state.data],
       };
     case UPDATE_PRODUCT:
       return {
@@ -46,6 +47,7 @@ const tableReducer = function (state = initialState, action) {
         column: [],
         data: [],
         editable: {},
+        actions: [],
       };
     default:
       return state;
