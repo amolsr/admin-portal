@@ -7,6 +7,7 @@ import {
 import { addShipping, updateShipping } from "./shipping";
 import { setAlert } from "./alert";
 import { SET_DATA, REMOVE_DATA } from "./types";
+import { addFixedFees, deleteFixedFees, updateFixedFees } from "./fixedfees";
 
 export const setData = (platform, type) => (dispatch) => {
   let column = [];
@@ -19,7 +20,7 @@ export const setData = (platform, type) => (dispatch) => {
       { title: "Category", field: "category", editable: "onAdd" },
       { title: "Commission", field: "commission" },
     ];
-    var form = {
+    let form = {
       set: true,
       type: "Add",
       page: type,
@@ -30,7 +31,7 @@ export const setData = (platform, type) => (dispatch) => {
     actions = [
       {
         icon: "add",
-        tooltip: "Add User",
+        tooltip: "Add Commission",
         isFreeAction: true,
         onClick: (event) =>
           new Promise((resolve, reject) => {
@@ -66,28 +67,63 @@ export const setData = (platform, type) => (dispatch) => {
   if (type === "Shipping") {
     if (platform === "clubFactory") {
       column = [
-        { title: "Type", field: "type" },
-        { title: "Region", field: "region" },
+        { title: "Type", field: "type", editable: "onAdd" },
+        { title: "Region", field: "region", editable: "onAdd" },
         { title: "Min", field: "min" },
         { title: "Max", field: "max" },
+      ];
+      let form = {
+        set: true,
+        type: "Add",
+        page: type,
+        fields: ["type", "field", "value"],
+        onSubmit: addShipping,
+      };
+      actions = [
+        {
+          icon: "add",
+          tooltip: "Add Shipping",
+          isFreeAction: true,
+          onClick: (event) =>
+            new Promise((resolve, reject) => {
+              setTimeout(() => {
+                dispatch(setAlert(true, form));
+                resolve();
+              }, 1000);
+            }),
+        },
       ];
     }
     if (platform === "flipkart") {
       column = [
-        { title: "Type", field: "type" },
+        { title: "Type", field: "type", editable: "onAdd" },
         { title: "Local", field: "local" },
         { title: "Zonal", field: "zonal" },
         { title: "National", field: "national" },
       ];
+      let form = {
+        set: true,
+        type: "Add",
+        page: type,
+        fields: ["type", "field", "value"],
+        onSubmit: addShipping,
+      };
+      actions = [
+        {
+          icon: "add",
+          tooltip: "Add Shipping",
+          isFreeAction: true,
+          onClick: (event) =>
+            new Promise((resolve, reject) => {
+              setTimeout(() => {
+                dispatch(setAlert(true, form));
+                resolve();
+              }, 1000);
+            }),
+        },
+      ];
     }
     editable = {
-      onRowAdd: (newData) =>
-        new Promise((resolve, reject) => {
-          setTimeout(() => {
-            dispatch(addShipping(newData, platform));
-            resolve();
-          }, 1000);
-        }),
       onRowUpdate: (newData, oldData) =>
         new Promise((resolve, reject) => {
           setTimeout(() => {
@@ -104,8 +140,8 @@ export const setData = (platform, type) => (dispatch) => {
   }
   if (type === "Fixed Fees") {
     column = [
-      { title: "Min", field: "minSp" },
-      { title: "Max", field: "maxSp" },
+      { title: "Min", field: "minSp", editable: "onAdd" },
+      { title: "Max", field: "maxSp", editable: "onAdd" },
       { title: "Range", field: "rate" },
     ];
     url =
@@ -113,6 +149,43 @@ export const setData = (platform, type) => (dispatch) => {
       "api/MPC/" +
       platform +
       "/admin/fixedFees/getAll";
+    let form = {
+      set: true,
+      type: "Add",
+      page: type,
+      fields: ["minSp", "rate"],
+      onSubmit: addFixedFees,
+    };
+    actions = [
+      {
+        icon: "add",
+        tooltip: "Add Fixed Fees",
+        isFreeAction: true,
+        onClick: (event) =>
+          new Promise((resolve, reject) => {
+            setTimeout(() => {
+              dispatch(setAlert(true, form));
+              resolve();
+            }, 1000);
+          }),
+      },
+    ];
+    editable = {
+      onRowUpdate: (newData, oldData) =>
+        new Promise((resolve, reject) => {
+          setTimeout(() => {
+            dispatch(updateFixedFees(oldData, newData, platform));
+            resolve();
+          }, 1000);
+        }),
+      onRowDelete: (oldData) =>
+        new Promise((resolve, reject) => {
+          setTimeout(() => {
+            dispatch(deleteFixedFees(oldData, platform));
+            resolve();
+          }, 1000);
+        }),
+    };
   }
   if (type === "Collection Fees") {
     column = [
