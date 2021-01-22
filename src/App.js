@@ -29,6 +29,21 @@ function App() {
             <Table type="Collection Fees" />
           </Dashboard>
         </Route>
+        <Route path="/dashboard/referral/:platform">
+          <Dashboard>
+            <Table type="Referral" />
+          </Dashboard>
+        </Route>
+        <Route path="/dashboard/closingfees/:platform">
+          <Dashboard>
+            <Table type="Closing Fees" />
+          </Dashboard>
+        </Route>
+        <Route path="/dashboard/fulfillmentfees/:platform">
+          <Dashboard>
+            <Table type="Fulfillment Fees" />
+          </Dashboard>
+        </Route>
         <Route path="/dashboard">
           <Dashboard>
             <Main />

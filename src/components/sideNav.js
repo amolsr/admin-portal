@@ -86,6 +86,53 @@ function getItems() {
         },
       ],
     },
+    {
+      id: 4,
+      title: "Amazon",
+      items: [
+        {
+          id: 1,
+          name: "Referral",
+          link: "/dashboard/referral/amazon",
+        },
+        {
+          id: 2,
+          name: "Closing Fees",
+          link: "/dashboard/closingfees/amazon",
+        },
+        {
+          id: 3,
+          name: "Shipping",
+          link: "/dashboard/shipping/amazon",
+        },
+      ],
+    },
+    {
+      id: 4,
+      title: "Amazon FBA",
+      items: [
+        {
+          id: 1,
+          name: "Referral",
+          link: "/dashboard/referral/amazonFba",
+        },
+        {
+          id: 2,
+          name: "Closing Fees",
+          link: "/dashboard/closingfees/amazonFba",
+        },
+        {
+          id: 3,
+          name: "Shipping",
+          link: "/dashboard/shipping/amazonFba",
+        },
+        {
+          id: 4,
+          name: "Fulfillment Fees",
+          link: "/dashboard/fulfillmentfees/amazonFba",
+        },
+      ],
+    },
   ];
 
   return json;

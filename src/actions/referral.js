@@ -3,12 +3,12 @@ import { removeAlert } from "./alert";
 import { setData } from "./table";
 import { DELETE_PRODUCT, UPDATE_PRODUCT } from "./types";
 
-export const addFixedFees = (newProduct, platform) => (dispatch) => {
+export const addReferral = (newProduct, platform) => (dispatch) => {
   fetch(
     process.env.REACT_APP_API_URL +
       "api/MPC/" +
       platform +
-      "/admin/fixedFees/addNew",
+      "/admin/referral/addNew",
     {
       method: "POST",
       headers: {
@@ -27,7 +27,7 @@ export const addFixedFees = (newProduct, platform) => (dispatch) => {
     })
     .then((data) => {
       toast.success(data.message);
-      dispatch(setData(platform, "Fixed Fees"));
+      dispatch(setData(platform, "Referral"));
       dispatch(removeAlert());
     })
     .catch((err) => {
@@ -35,29 +35,27 @@ export const addFixedFees = (newProduct, platform) => (dispatch) => {
     });
 };
 
-export const updateFixedFees = (oldProduct, newProduct, platform) => (
+export const updateReferral = (oldProduct, newProduct, platform) => (
   dispatch
 ) => {
-  let body = {};
-  if (platform === "flipkart") {
-    body = {
-      minSp: newProduct.minSp,
-      maxSp: newProduct.maxSp,
-      newRate: newProduct.rate,
-    };
-  }
   fetch(
     process.env.REACT_APP_API_URL +
       "api/MPC/" +
       platform +
-      "/admin/fixedFees/update",
+      "/admin/referral/update",
     {
       method: "PUT",
       headers: {
         "content-type": "application/json",
         "x-auth": localStorage.getItem("token"),
       },
-      body: JSON.stringify(body),
+      body: JSON.stringify({
+        category: oldProduct.category,
+        subcategory: oldProduct.subcategory,
+        partitionAmount: newProduct.partitionAmount,
+        primaryCommission: newProduct.primaryCommission,
+        secondaryCommission: newProduct.secondaryCommission,
+      }),
     }
   )
     .then(async function (response) {
@@ -82,12 +80,12 @@ export const updateFixedFees = (oldProduct, newProduct, platform) => (
     });
 };
 
-export const deleteFixedFees = (oldProduct, platform) => (dispatch) => {
+export const deleteReferral = (oldProduct, platform) => (dispatch) => {
   fetch(
     process.env.REACT_APP_API_URL +
       "api/MPC/" +
       platform +
-      "/admin/fixedFees/delete",
+      "/admin/referral/delete",
     {
       method: "DELETE",
       headers: {
@@ -95,7 +93,8 @@ export const deleteFixedFees = (oldProduct, platform) => (dispatch) => {
         "x-auth": localStorage.getItem("token"),
       },
       body: JSON.stringify({
-        minSp: oldProduct.minSp,
+        category: oldProduct.category,
+        subcategory: oldProduct.subcategory,
       }),
     }
   )

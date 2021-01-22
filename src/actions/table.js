@@ -8,6 +8,12 @@ import { addShipping, updateShipping } from "./shipping";
 import { setAlert } from "./alert";
 import { SET_DATA, REMOVE_DATA } from "./types";
 import { addFixedFees, deleteFixedFees, updateFixedFees } from "./fixedfees";
+import {
+  addCollectionFees,
+  deleteCollectionFees,
+  updateCollectionFees,
+} from "./collectionfees";
+import { addReferral, deleteReferral, updateReferral } from "./referral";
 
 export const setData = (platform, type) => (dispatch) => {
   let column = [];
@@ -141,7 +147,7 @@ export const setData = (platform, type) => (dispatch) => {
   if (type === "Fixed Fees") {
     column = [
       { title: "Min", field: "minSp", editable: "onAdd" },
-      { title: "Max", field: "maxSp", editable: "onAdd" },
+      { title: "Max", field: "maxSp" },
       { title: "Range", field: "rate" },
     ];
     url =
@@ -189,7 +195,7 @@ export const setData = (platform, type) => (dispatch) => {
   }
   if (type === "Collection Fees") {
     column = [
-      { title: "Min", field: "minSp" },
+      { title: "Min", field: "minSp", editable: "onAdd" },
       { title: "Max", field: "maxSp" },
       { title: "Post Paid %", field: "postPaidPercentage" },
       { title: "Post Paid \u20B9", field: "postPaidRuppee" },
@@ -201,8 +207,167 @@ export const setData = (platform, type) => (dispatch) => {
       "api/MPC/" +
       platform +
       "/admin/collectionFees/getAll";
+    let form = {
+      set: true,
+      type: "Add",
+      page: type,
+      fields: [
+        "minSp",
+        "maxSp",
+        "prePaidType",
+        "prePaidValue",
+        "postPaidType",
+        "postPaidValue",
+      ],
+      onSubmit: addCollectionFees,
+    };
+    actions = [
+      {
+        icon: "add",
+        tooltip: "Add Collection Fees",
+        isFreeAction: true,
+        onClick: (event) =>
+          new Promise((resolve, reject) => {
+            setTimeout(() => {
+              dispatch(setAlert(true, form));
+              resolve();
+            }, 1000);
+          }),
+      },
+    ];
+    editable = {
+      onRowUpdate: (newData, oldData) =>
+        new Promise((resolve, reject) => {
+          setTimeout(() => {
+            dispatch(updateCollectionFees(oldData, newData, platform));
+            resolve();
+          }, 1000);
+        }),
+      onRowDelete: (oldData) =>
+        new Promise((resolve, reject) => {
+          setTimeout(() => {
+            dispatch(deleteCollectionFees(oldData, platform));
+            resolve();
+          }, 1000);
+        }),
+    };
   }
-  console.log(url);
+  if (type === "Referral") {
+    column = [
+      { title: "Category", field: "category", editable: "onAdd" },
+      { title: "Subcategory", field: "subcategory", editable: "onAdd" },
+      { title: "Partition Amount", field: "partitionAmount" },
+      { title: "Primary Commission", field: "primaryCommission" },
+      { title: "Secondary Commission", field: "secondaryCommission" },
+    ];
+    url =
+      process.env.REACT_APP_API_URL +
+      "api/MPC/" +
+      platform +
+      "/admin/referral/getAll";
+    let form = {
+      set: true,
+      type: "Add",
+      page: type,
+      fields: [
+        "category",
+        "subcategory",
+        "partitionAmount",
+        "primaryCommission",
+        "secondaryCommission",
+      ],
+      onSubmit: addReferral,
+    };
+    actions = [
+      {
+        icon: "add",
+        tooltip: "Add Referral",
+        isFreeAction: true,
+        onClick: (event) =>
+          new Promise((resolve, reject) => {
+            setTimeout(() => {
+              dispatch(setAlert(true, form));
+              resolve();
+            }, 1000);
+          }),
+      },
+    ];
+    editable = {
+      onRowUpdate: (newData, oldData) =>
+        new Promise((resolve, reject) => {
+          setTimeout(() => {
+            dispatch(updateReferral(oldData, newData, platform));
+            resolve();
+          }, 1000);
+        }),
+      onRowDelete: (oldData) =>
+        new Promise((resolve, reject) => {
+          setTimeout(() => {
+            dispatch(deleteReferral(oldData, platform));
+            resolve();
+          }, 1000);
+        }),
+    };
+  }
+  if (type === "Closing Fees") {
+    column = [
+      { title: "Min", field: "minSp", editable: "onAdd" },
+      { title: "Max", field: "maxSp" },
+      { title: "Easy Ship Non Prime", field: "easyShipNonPrime" },
+      { title: "Easy Ship Prime", field: "easyShipPrime" },
+      { title: "Self Ship", field: "selfShip" },
+      { title: "FBA", field: "fba" },
+    ];
+    url =
+      process.env.REACT_APP_API_URL +
+      "api/MPC/" +
+      platform +
+      "/admin/closingFees/getAll";
+    let form = {
+      set: true,
+      type: "Add",
+      page: type,
+      fields: [
+        "minSp",
+        "maxSp",
+        "prePaidType",
+        "prePaidValue",
+        "postPaidType",
+        "postPaidValue",
+      ],
+      onSubmit: addCollectionFees,
+    };
+    actions = [
+      {
+        icon: "add",
+        tooltip: "Add Closing Fees",
+        isFreeAction: true,
+        onClick: (event) =>
+          new Promise((resolve, reject) => {
+            setTimeout(() => {
+              dispatch(setAlert(true, form));
+              resolve();
+            }, 1000);
+          }),
+      },
+    ];
+    editable = {
+      onRowUpdate: (newData, oldData) =>
+        new Promise((resolve, reject) => {
+          setTimeout(() => {
+            dispatch(updateCollectionFees(oldData, newData, platform));
+            resolve();
+          }, 1000);
+        }),
+      onRowDelete: (oldData) =>
+        new Promise((resolve, reject) => {
+          setTimeout(() => {
+            dispatch(deleteCollectionFees(oldData, platform));
+            resolve();
+          }, 1000);
+        }),
+    };
+  }
   fetch(url, {
     method: "GET",
     headers: {

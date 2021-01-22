@@ -1,15 +1,14 @@
 import { toast } from "react-toastify";
 import { removeAlert } from "./alert";
 import { setData } from "./table";
-import { UPDATE_PRODUCT } from "./types";
-import { diff } from "./util";
+import { DELETE_PRODUCT, UPDATE_PRODUCT } from "./types";
 
-export const addShipping = (newProduct, platform) => (dispatch) => {
+export const addCollectionFees = (newProduct, platform) => (dispatch) => {
   fetch(
     process.env.REACT_APP_API_URL +
       "api/MPC/" +
       platform +
-      "/admin/outwardShipping/addNew",
+      "/admin/collectionFees/addNew",
     {
       method: "POST",
       headers: {
@@ -28,7 +27,7 @@ export const addShipping = (newProduct, platform) => (dispatch) => {
     })
     .then((data) => {
       toast.success(data.message);
-      dispatch(setData(platform, "Shipping"));
+      dispatch(setData(platform, "Fixed Fees"));
       dispatch(removeAlert());
     })
     .catch((err) => {
@@ -36,40 +35,22 @@ export const addShipping = (newProduct, platform) => (dispatch) => {
     });
 };
 
-export const updateShipping = (oldProduct, newProduct, platform) => (
+export const updateCollectionFees = (oldProduct, newProduct, platform) => (
   dispatch
 ) => {
-  let value = JSON.parse(JSON.stringify(oldProduct));
-  delete value.tableData;
-  let update = diff(value, newProduct);
   let body = {};
-  if (platform === "clubFactory") {
-    body = {
-      type: oldProduct.type + "OutwardShipping",
-      field:
-        oldProduct.region +
-        Object.keys(update)[0].charAt(0).toUpperCase() +
-        Object.keys(update)[0].slice(1),
-      newValue: Object.values(update)[0],
-    };
-  }
   if (platform === "flipkart") {
     body = {
-      type:
-        "weight" +
-        newProduct.type.charAt(0).toUpperCase() +
-        newProduct.type.slice(1) +
-        "_outwardShipping",
-      field: Object.keys(update)[0],
-      newValue: Object.values(update)[0],
+      minSp: newProduct.minSp,
+      maxSp: newProduct.maxSp,
+      newRate: newProduct.rate,
     };
   }
-
   fetch(
     process.env.REACT_APP_API_URL +
       "api/MPC/" +
       platform +
-      "/admin/outwardShipping/update",
+      "/admin/collectionFees/update",
     {
       method: "PUT",
       headers: {
@@ -92,6 +73,44 @@ export const updateShipping = (oldProduct, newProduct, platform) => (
         type: UPDATE_PRODUCT,
         payload: {
           newProduct,
+          oldProduct,
+        },
+      });
+    })
+    .catch((err) => {
+      toast.error(err.message);
+    });
+};
+
+export const deleteCollectionFees = (oldProduct, platform) => (dispatch) => {
+  fetch(
+    process.env.REACT_APP_API_URL +
+      "api/MPC/" +
+      platform +
+      "/admin/collectionFees/delete",
+    {
+      method: "DELETE",
+      headers: {
+        "content-type": "application/json",
+        "x-auth": localStorage.getItem("token"),
+      },
+      body: JSON.stringify({
+        minSp: oldProduct.minSp,
+      }),
+    }
+  )
+    .then(async function (response) {
+      if (!response.ok) {
+        let data = await response.json();
+        throw new Error(data.message);
+      }
+      return response.json();
+    })
+    .then((data) => {
+      toast.success(data.message);
+      dispatch({
+        type: DELETE_PRODUCT,
+        payload: {
           oldProduct,
         },
       });
