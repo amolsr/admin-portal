@@ -64,6 +64,9 @@ export const updateShipping = (oldProduct, newProduct, platform) => (
       newValue: Object.values(update)[0],
     };
   }
+  if (platform === "amazonFba" || platform === "amazon") {
+    body = newProduct;
+  }
 
   fetch(
     process.env.REACT_APP_API_URL +
