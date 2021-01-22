@@ -8,7 +8,7 @@ export const addFulfillmentFees = (newProduct, platform) => (dispatch) => {
     process.env.REACT_APP_API_URL +
       "api/MPC/" +
       platform +
-      "/admin/referral/addNew",
+      "/admin/fulfillment/addNew",
     {
       method: "POST",
       headers: {
@@ -42,14 +42,14 @@ export const updateFulfillmentFees = (oldProduct, newProduct, platform) => (
     process.env.REACT_APP_API_URL +
       "api/MPC/" +
       platform +
-      "/admin/referral/update",
+      "/admin/fulfillment/update",
     {
       method: "PUT",
       headers: {
         "content-type": "application/json",
         "x-auth": localStorage.getItem("token"),
       },
-      body: JSON.stringify(body),
+      body: JSON.stringify(newProduct),
     }
   )
     .then(async function (response) {
@@ -79,7 +79,7 @@ export const deleteFulfillmentFees = (oldProduct, platform) => (dispatch) => {
     process.env.REACT_APP_API_URL +
       "api/MPC/" +
       platform +
-      "/admin/referral/delete",
+      "/admin/fulfillment/delete",
     {
       method: "DELETE",
       headers: {

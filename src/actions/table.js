@@ -14,6 +14,16 @@ import {
   updateCollectionFees,
 } from "./collectionfees";
 import { addReferral, deleteReferral, updateReferral } from "./referral";
+import {
+  addClosingFees,
+  deleteClosingFees,
+  updateClosingFees,
+} from "./closingfees";
+import {
+  addFulfillmentFees,
+  updateFulfillmentFees,
+  deleteFulfillmentFees,
+} from "./fulfillmentfees";
 
 export const setData = (platform, type) => (dispatch) => {
   let column = [];
@@ -112,6 +122,50 @@ export const setData = (platform, type) => (dispatch) => {
         type: "Add",
         page: type,
         fields: ["type", "field", "value"],
+        onSubmit: addShipping,
+      };
+      actions = [
+        {
+          icon: "add",
+          tooltip: "Add Shipping",
+          isFreeAction: true,
+          onClick: (event) =>
+            new Promise((resolve, reject) => {
+              setTimeout(() => {
+                dispatch(setAlert(true, form));
+                resolve();
+              }, 1000);
+            }),
+        },
+      ];
+    }
+    if (platform === "amazonFba" || platform === "amazon") {
+      column = [
+        {
+          title: "Weight Category",
+          field: "weightCategory",
+          editable: "onAdd",
+        },
+        {
+          title: "Weight SubCategory",
+          field: "weightSubCategory",
+          editable: "onAdd",
+        },
+        { title: "Local", field: "local" },
+        { title: "Regional", field: "regional" },
+        { title: "National", field: "national" },
+      ];
+      let form = {
+        set: true,
+        type: "Add",
+        page: type,
+        fields: [
+          "weightCategory",
+          "weightSubCategory",
+          "local",
+          "regional",
+          "national",
+        ],
         onSubmit: addShipping,
       };
       actions = [
@@ -313,30 +367,31 @@ export const setData = (platform, type) => (dispatch) => {
     column = [
       { title: "Min", field: "minSp", editable: "onAdd" },
       { title: "Max", field: "maxSp" },
-      { title: "Easy Ship Non Prime", field: "easyShipNonPrime" },
-      { title: "Easy Ship Prime", field: "easyShipPrime" },
-      { title: "Self Ship", field: "selfShip" },
-      { title: "FBA", field: "fba" },
     ];
+    let form = {
+      set: true,
+      type: "Add",
+      page: type,
+      fields: ["minSp", "maxSp"],
+      onSubmit: addClosingFees,
+    };
+    if (platform === "amazon") {
+      column.push(
+        { title: "Easy Ship Non Prime", field: "easyShipNonPrime" },
+        { title: "Easy Ship Prime", field: "easyShipPrime" },
+        { title: "Self Ship", field: "selfShip" }
+      );
+      form.fields.push("easyShipNonPrime", "easyShipPrime", "selfShip");
+    }
+    if (platform === "amazonFba") {
+      column.push({ title: "FBA", field: "fba" });
+      form.fields.push("fba");
+    }
     url =
       process.env.REACT_APP_API_URL +
       "api/MPC/" +
       platform +
       "/admin/closingFees/getAll";
-    let form = {
-      set: true,
-      type: "Add",
-      page: type,
-      fields: [
-        "minSp",
-        "maxSp",
-        "prePaidType",
-        "prePaidValue",
-        "postPaidType",
-        "postPaidValue",
-      ],
-      onSubmit: addCollectionFees,
-    };
     actions = [
       {
         icon: "add",
@@ -355,14 +410,67 @@ export const setData = (platform, type) => (dispatch) => {
       onRowUpdate: (newData, oldData) =>
         new Promise((resolve, reject) => {
           setTimeout(() => {
-            dispatch(updateCollectionFees(oldData, newData, platform));
+            dispatch(updateClosingFees(oldData, newData, platform));
             resolve();
           }, 1000);
         }),
       onRowDelete: (oldData) =>
         new Promise((resolve, reject) => {
           setTimeout(() => {
-            dispatch(deleteCollectionFees(oldData, platform));
+            dispatch(deleteClosingFees(oldData, platform));
+            resolve();
+          }, 1000);
+        }),
+    };
+  }
+  if (type === "Fulfillment Fees") {
+    column = [
+      { title: "Category", field: "category", editable: "onAdd" },
+      { title: "Subcategory", field: "subcategory", editable: "onAdd" },
+      { title: "Local Shipping Fees", field: "localShippingFees" },
+      { title: "Regional Shipping Fees", field: "regionalShippingFees" },
+      { title: "National Shipping Fees", field: "nationalShippingFees" },
+      { title: "Pick And Pack Fees", field: "pickAndPackFees" },
+      { title: "Storing Fees", field: "storingFees" },
+    ];
+    let form = {
+      set: true,
+      type: "Add",
+      page: type,
+      fields: [
+        "category",
+        "subcategory",
+        "pickAndPackFees",
+        "storageFees",
+        "localShippingFees",
+        "regionalShippingFees",
+      ],
+      onSubmit: addFulfillmentFees,
+    };
+    url =
+      process.env.REACT_APP_API_URL +
+      "api/MPC/" +
+      platform +
+      "/admin/fulfillment/getAll";
+    actions = [
+      {
+        icon: "add",
+        tooltip: "Add Closing Fees",
+        isFreeAction: true,
+        onClick: (event) =>
+          new Promise((resolve, reject) => {
+            setTimeout(() => {
+              dispatch(setAlert(true, form));
+              resolve();
+            }, 1000);
+          }),
+      },
+    ];
+    editable = {
+      onRowUpdate: (newData, oldData) =>
+        new Promise((resolve, reject) => {
+          setTimeout(() => {
+            dispatch(updateFulfillmentFees(oldData, newData, platform));
             resolve();
           }, 1000);
         }),
