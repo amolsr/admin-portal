@@ -69,13 +69,35 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignInSide(props) {
   const classes = useStyles();
-  const [id, setId] = useState("7300707372");
+  const [id, setId] = useState();
   const handleChange = (event) => {
     setId(event.target.value);
   };
   useEffect(() => {
     localStorage.removeItem("token");
   }, []);
+
+  const handleClick = () => {
+    fetch(process.env.REACT_APP_API_URL + "api/MPC/admin/forgetPassword", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+    })
+      .then(async function (response) {
+        if (!response.ok) {
+          let data = await response.json();
+          throw new Error(data.message);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        toast.success(data.message);
+      })
+      .catch((err) => {
+        toast.error(err.message);
+      });
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -159,7 +181,12 @@ export default function SignInSide(props) {
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link href="#" variant="body2" color="secondary">
+                  <Link
+                    href="#"
+                    variant="body2"
+                    color="secondary"
+                    onClick={handleClick}
+                  >
                     Forgot password?
                   </Link>
                 </Grid>
