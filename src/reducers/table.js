@@ -23,7 +23,7 @@ const tableReducer = function (state = initialState, action) {
     case ADD_PRODUCT:
       return {
         ...state,
-        data: [action.payload.newProduct, ...state.data],
+        data: [...state.data, action.payload.newProduct],
       };
     case UPDATE_PRODUCT:
       return {

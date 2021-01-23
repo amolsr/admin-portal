@@ -26,7 +26,6 @@ export const setData = (platform, type) => (dispatch) => {
   let editable = {};
   let actions = [];
   let url = "";
-  console.log(platform + " " + type);
   if (type === "Commission") {
     column = [
       { title: "Category", field: "category", editable: "onAdd" },
