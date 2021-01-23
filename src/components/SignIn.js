@@ -8,7 +8,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { toast } from "react-toastify";
-import { Paper } from "@material-ui/core";
+import { Hidden, Paper } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -112,16 +112,18 @@ export default function SignInSide(props) {
     >
       {/* <ToastContainer autoClose={2000} /> */}
       <Grid container className={classes.title}>
-        <Grid item xs={6}>
+        <Grid item xs={12} sm={6}>
           <Typography variant="h5" component="h6" className={classes.t1}>
             Ecommerce Admin Panel
           </Typography>
         </Grid>
-        <Grid item xs={6}>
-          <Typography variant="h5" component="h6" className={classes.t2}>
-            4posper
-          </Typography>
-        </Grid>
+        <Hidden smDown>
+          <Grid item xs={false} sm={6}>
+            <Typography variant="h5" component="h6" className={classes.t2}>
+              4posper
+            </Typography>
+          </Grid>
+        </Hidden>
       </Grid>
       <Grid container spacing={3} style={{ width: "100%" }}>
         <Grid item xs={12} md={6}>
@@ -165,7 +167,9 @@ export default function SignInSide(props) {
             </form>
           </Paper>
         </Grid>
-        <Grid item xs={false} md={6} className={classes.image} />
+        <Hidden smDown>
+          <Grid item xs={false} md={6} className={classes.image} />
+        </Hidden>
       </Grid>
     </Grid>
   );
