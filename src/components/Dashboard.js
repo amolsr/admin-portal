@@ -49,6 +49,7 @@ const useStyles = makeStyles((theme) => ({
     }),
   },
   menuButton: {
+    color: "white",
     marginRight: 36,
   },
   menuButtonHidden: {
@@ -56,6 +57,8 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+    color: "white",
+    font: "normal normal normal 20px Righteous",
   },
   drawerPaper: {
     position: "relative",
@@ -96,6 +99,9 @@ const useStyles = makeStyles((theme) => ({
   fixedHeight: {
     height: 240,
   },
+  icon: {
+    color: "white",
+  },
 }));
 
 export default function Dashboard(props) {
@@ -118,7 +124,6 @@ export default function Dashboard(props) {
         <Toolbar className={classes.toolbar}>
           <IconButton
             edge="start"
-            color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             className={clsx(
@@ -131,7 +136,6 @@ export default function Dashboard(props) {
           <Typography
             component="h1"
             variant="h6"
-            color="inherit"
             noWrap
             className={classes.title}
           >
@@ -145,7 +149,7 @@ export default function Dashboard(props) {
               textDecoration: "none",
             }}
           >
-            <IconButton color="inherit">
+            <IconButton className={classes.icon}>
               <ExitToAppIcon />
             </IconButton>
           </Link>

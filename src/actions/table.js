@@ -19,11 +19,7 @@ import {
   deleteClosingFees,
   updateClosingFees,
 } from "./closingfees";
-import {
-  addFulfillmentFees,
-  updateFulfillmentFees,
-  deleteFulfillmentFees,
-} from "./fulfillmentfees";
+import { addFulfillmentFees, updateFulfillmentFees } from "./fulfillmentfees";
 
 export const setData = (platform, type) => (dispatch) => {
   let column = [];

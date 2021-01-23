@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 // import { setAlert } from "../actions/alert";
 import { useEffect } from "react";
 import { removeData, setData } from "../actions/table";
+
 export default function Table(props) {
   let params = useParams();
 
@@ -25,6 +26,10 @@ export default function Table(props) {
       options={{
         paging: false,
         actionsColumnIndex: -1,
+        headerStyle: {
+          backgroundColor: "#F7852E",
+          color: "#FFF",
+        },
       }}
     />
   );

@@ -144,9 +144,10 @@ class NestedList extends React.Component {
   };
   componentDidMount() {
     if (this.props.match.params.platform) {
-      var result = this.props.match.params.platform
+      var k = this.props.match.params.platform
         .replace(/([A-Z])/g, " $1")
         .trim();
+      var result = k.charAt(0).toUpperCase() + k.slice(1);
       this.setState({
         [result]: !this.state[this.props.match.params.platform],
       });
