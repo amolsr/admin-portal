@@ -20,6 +20,7 @@ import {
   updateClosingFees,
 } from "./closingfees";
 import { addFulfillmentFees, updateFulfillmentFees } from "./fulfillmentfees";
+import { addUser, deleteUser } from "./user";
 
 export const setData = (platform, type) => (dispatch) => {
   let column = [];
@@ -76,6 +77,21 @@ export const setData = (platform, type) => (dispatch) => {
       "/admin/commission/getAll";
   }
   if (type === "Shipping") {
+    if (platform === "meesho") {
+      column = [
+        { title: "Type", field: "type", editable: "onAdd" },
+        { title: "Price", field: "price", editable: "onAdd" }
+      ];
+      editable = {
+        onRowUpdate: (newData, oldData) =>
+          new Promise((resolve, reject) => {
+            setTimeout(() => {
+              dispatch(updateShipping(oldData, newData, platform));
+              resolve();
+            }, 1000);
+          }),
+      };
+    }
     if (platform === "clubFactory") {
       column = [
         { title: "Type", field: "type", editable: "onAdd" },
@@ -237,6 +253,46 @@ export const setData = (platform, type) => (dispatch) => {
         new Promise((resolve, reject) => {
           setTimeout(() => {
             dispatch(deleteFixedFees(oldData, platform));
+            resolve();
+          }, 1000);
+        }),
+    };
+  }
+  if (type === "Information" && platform === "user") {
+    column = [
+      { title: "Name", field: "name" },
+      { title: "Email", field: "email" },
+      { title: "Mobile Number", field: "mobile_no" },
+    ];
+    url =
+      process.env.REACT_APP_API_URL +
+      "api/users/admin/read";
+    let form = {
+      set: true,
+      type: "Add",
+      page: "User",
+      fields: ["name", "email", "mobile_no", "password"],
+      onSubmit: addUser,
+    };
+    actions = [
+      {
+        icon: "add",
+        tooltip: "Add User",
+        isFreeAction: true,
+        onClick: (event) =>
+          new Promise((resolve, reject) => {
+            setTimeout(() => {
+              dispatch(setAlert(true, form));
+              resolve();
+            }, 1000);
+          }),
+      },
+    ];
+    editable = {
+      onRowDelete: (oldData) =>
+        new Promise((resolve, reject) => {
+          setTimeout(() => {
+            dispatch(deleteUser(oldData, platform));
             resolve();
           }, 1000);
         }),

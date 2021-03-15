@@ -16,7 +16,7 @@ export default function Table(props) {
 
   return (
     <MaterialTable
-      title={params.platform + " " + props.type}
+      title={(params.platform ? params.platform + " " + props.type : props.type)}
       columns={table.column}
       data={table.data}
       editable={table.editable}

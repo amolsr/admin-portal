@@ -35,6 +35,11 @@ function getItems() {
     },
     {
       id: 2,
+      title: "User",
+      link: "/dashboard/information/user",
+    },
+    {
+      id: 3,
       title: "Meesho",
       items: [
         {
@@ -42,10 +47,15 @@ function getItems() {
           name: "Commission",
           link: "/dashboard/commission/meesho",
         },
+        {
+          id: 2,
+          name: "Shipping",
+          link: "/dashboard/shipping/meesho",
+        },
       ],
     },
     {
-      id: 3,
+      id: 4,
       title: "Club Factory",
       items: [
         {
@@ -61,7 +71,7 @@ function getItems() {
       ],
     },
     {
-      id: 4,
+      id: 5,
       title: "Flipkart",
       items: [
         {
@@ -87,7 +97,7 @@ function getItems() {
       ],
     },
     {
-      id: 4,
+      id: 6,
       title: "Amazon",
       items: [
         {
@@ -108,7 +118,7 @@ function getItems() {
       ],
     },
     {
-      id: 4,
+      id: 7,
       title: "Amazon FBA",
       items: [
         {
