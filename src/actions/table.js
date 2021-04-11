@@ -1,65 +1,36 @@
-import {
-  toast
-} from "react-toastify";
+import { toast } from "react-toastify";
 import {
   addCommission,
   updateCommission,
   deleteCommission,
 } from "./commission";
-import {
-  addShipping,
-  updateShipping
-} from "./shipping";
-import {
-  setAlert
-} from "./alert";
-import {
-  SET_DATA,
-  REMOVE_DATA
-} from "./types";
-import {
-  addFixedFees,
-  deleteFixedFees,
-  updateFixedFees
-} from "./fixedfees";
+import { addShipping, updateShipping } from "./shipping";
+import { setAlert } from "./alert";
+import { SET_DATA, REMOVE_DATA } from "./types";
+import { addFixedFees, deleteFixedFees, updateFixedFees } from "./fixedfees";
 import {
   addCollectionFees,
   deleteCollectionFees,
   updateCollectionFees,
 } from "./collectionfees";
-import {
-  addReferral,
-  deleteReferral,
-  updateReferral
-} from "./referral";
+import { addReferral, deleteReferral, updateReferral } from "./referral";
 import {
   addClosingFees,
   deleteClosingFees,
   updateClosingFees,
 } from "./closingfees";
-import {
-  addFulfillmentFees,
-  updateFulfillmentFees
-} from "./fulfillmentfees";
-import {
-  addUser,
-  deleteUser
-} from "./user";
+import { addFulfillmentFees, updateFulfillmentFees } from "./fulfillmentfees";
+import { addUser, deleteUser } from "./user";
 
 export const setData = (platform, type, email) => (dispatch) => {
   let column = [];
   let editable = {};
   let actions = [];
   let url = "";
-  if (email !== undefined) {
-    column = [{
-        title: "Title",
-        field: "title"
-      },
-      {
-        title: "Date",
-        field: "date"
-      },
+ if(email!==undefined){
+    column = [
+    { title: "Title", field: "title" },
+    { title: "Date", field: "date" },
     ];
     editable = {
       onRowDelete: (oldData) =>
@@ -70,26 +41,22 @@ export const setData = (platform, type, email) => (dispatch) => {
           }, 1000);
         }),
     };
-    actions = [{
-      icon: 'info',
-      tooltip: 'calculation',
-      onClick: (event, rowData) => {
-        // Do save operation
+    actions=[
+      {
+        icon: 'info',
+        tooltip: 'calculation',
+        onClick: (event, rowData) => {
+          // Do save operation
+        }
       }
-    }]
-    url = process.env.REACT_APP_API_URL + "api/users/admin/show/saved/title?company=" + platform + "&email=" + email + "&role=Admin"
-  }
+    ]
+    url = process.env.REACT_APP_API_URL +"api/users/admin/show/saved/title?company="+platform+"&email="+email+"&role=Admin"
+ }
 
   if (type === "Commission") {
-    column = [{
-        title: "Category",
-        field: "category",
-        editable: "onAdd"
-      },
-      {
-        title: "Commission",
-        field: "commission"
-      },
+    column = [
+      { title: "Category", field: "category", editable: "onAdd" },
+      { title: "Commission", field: "commission" },
     ];
     let form = {
       set: true,
@@ -99,18 +66,20 @@ export const setData = (platform, type, email) => (dispatch) => {
       onSubmit: addCommission,
     };
 
-    actions = [{
-      icon: "add",
-      tooltip: "Add Commission",
-      isFreeAction: true,
-      onClick: (event) =>
-        new Promise((resolve, reject) => {
-          setTimeout(() => {
-            dispatch(setAlert(true, form));
-            resolve();
-          }, 1000);
-        }),
-    }, ];
+    actions = [
+      {
+        icon: "add",
+        tooltip: "Add Commission",
+        isFreeAction: true,
+        onClick: (event) =>
+          new Promise((resolve, reject) => {
+            setTimeout(() => {
+              dispatch(setAlert(true, form));
+              resolve();
+            }, 1000);
+          }),
+      },
+    ];
     editable = {
       onRowUpdate: (newData, oldData) =>
         new Promise((resolve, reject) => {
@@ -135,16 +104,9 @@ export const setData = (platform, type, email) => (dispatch) => {
   }
   if (type === "Shipping") {
     if (platform === "meesho") {
-      column = [{
-          title: "Type",
-          field: "type",
-          editable: "onAdd"
-        },
-        {
-          title: "Price",
-          field: "price",
-          editable: "onUpdate"
-        }
+      column = [
+        { title: "Type", field: "type", editable: "onAdd" },
+        { title: "Price", field: "price", editable: "onUpdate" }
       ];
       editable = {
         onRowUpdate: (newData, oldData) =>
@@ -157,24 +119,11 @@ export const setData = (platform, type, email) => (dispatch) => {
       };
     }
     if (platform === "clubFactory") {
-      column = [{
-          title: "Type",
-          field: "type",
-          editable: "onAdd"
-        },
-        {
-          title: "Region",
-          field: "region",
-          editable: "onAdd"
-        },
-        {
-          title: "Min",
-          field: "min"
-        },
-        {
-          title: "Max",
-          field: "max"
-        },
+      column = [
+        { title: "Type", field: "type", editable: "onAdd" },
+        { title: "Region", field: "region", editable: "onAdd" },
+        { title: "Min", field: "min" },
+        { title: "Max", field: "max" },
       ];
       let form = {
         set: true,
@@ -183,37 +132,27 @@ export const setData = (platform, type, email) => (dispatch) => {
         fields: ["type", "field", "value"],
         onSubmit: addShipping,
       };
-      actions = [{
-        icon: "add",
-        tooltip: "Add Shipping",
-        isFreeAction: true,
-        onClick: (event) =>
-          new Promise((resolve, reject) => {
-            setTimeout(() => {
-              dispatch(setAlert(true, form));
-              resolve();
-            }, 1000);
-          }),
-      }, ];
+      actions = [
+        {
+          icon: "add",
+          tooltip: "Add Shipping",
+          isFreeAction: true,
+          onClick: (event) =>
+            new Promise((resolve, reject) => {
+              setTimeout(() => {
+                dispatch(setAlert(true, form));
+                resolve();
+              }, 1000);
+            }),
+        },
+      ];
     }
     if (platform === "flipkart") {
-      column = [{
-          title: "Type",
-          field: "type",
-          editable: "onAdd"
-        },
-        {
-          title: "Local",
-          field: "local"
-        },
-        {
-          title: "Zonal",
-          field: "zonal"
-        },
-        {
-          title: "National",
-          field: "national"
-        },
+      column = [
+        { title: "Type", field: "type", editable: "onAdd" },
+        { title: "Local", field: "local" },
+        { title: "Zonal", field: "zonal" },
+        { title: "National", field: "national" },
       ];
       let form = {
         set: true,
@@ -222,21 +161,24 @@ export const setData = (platform, type, email) => (dispatch) => {
         fields: ["type", "field", "value"],
         onSubmit: addShipping,
       };
-      actions = [{
-        icon: "add",
-        tooltip: "Add Shipping",
-        isFreeAction: true,
-        onClick: (event) =>
-          new Promise((resolve, reject) => {
-            setTimeout(() => {
-              dispatch(setAlert(true, form));
-              resolve();
-            }, 1000);
-          }),
-      }, ];
+      actions = [
+        {
+          icon: "add",
+          tooltip: "Add Shipping",
+          isFreeAction: true,
+          onClick: (event) =>
+            new Promise((resolve, reject) => {
+              setTimeout(() => {
+                dispatch(setAlert(true, form));
+                resolve();
+              }, 1000);
+            }),
+        },
+      ];
     }
     if (platform === "amazonFba" || platform === "amazon") {
-      column = [{
+      column = [
+        {
           title: "Weight Category",
           field: "weightCategory",
           editable: "onAdd",
@@ -246,18 +188,9 @@ export const setData = (platform, type, email) => (dispatch) => {
           field: "weightSubCategory",
           editable: "onAdd",
         },
-        {
-          title: "Local",
-          field: "local"
-        },
-        {
-          title: "Regional",
-          field: "regional"
-        },
-        {
-          title: "National",
-          field: "national"
-        },
+        { title: "Local", field: "local" },
+        { title: "Regional", field: "regional" },
+        { title: "National", field: "national" },
       ];
       let form = {
         set: true,
@@ -272,18 +205,20 @@ export const setData = (platform, type, email) => (dispatch) => {
         ],
         onSubmit: addShipping,
       };
-      actions = [{
-        icon: "add",
-        tooltip: "Add Shipping",
-        isFreeAction: true,
-        onClick: (event) =>
-          new Promise((resolve, reject) => {
-            setTimeout(() => {
-              dispatch(setAlert(true, form));
-              resolve();
-            }, 1000);
-          }),
-      }, ];
+      actions = [
+        {
+          icon: "add",
+          tooltip: "Add Shipping",
+          isFreeAction: true,
+          onClick: (event) =>
+            new Promise((resolve, reject) => {
+              setTimeout(() => {
+                dispatch(setAlert(true, form));
+                resolve();
+              }, 1000);
+            }),
+        },
+      ];
     }
     editable = {
       onRowUpdate: (newData, oldData) =>
@@ -301,19 +236,10 @@ export const setData = (platform, type, email) => (dispatch) => {
       "/admin/outwardShipping/getAll";
   }
   if (type === "Fixed Fees") {
-    column = [{
-        title: "Min",
-        field: "minSp",
-        editable: "onAdd"
-      },
-      {
-        title: "Max",
-        field: "maxSp"
-      },
-      {
-        title: "Range",
-        field: "rate"
-      },
+    column = [
+      { title: "Min", field: "minSp", editable: "onAdd" },
+      { title: "Max", field: "maxSp" },
+      { title: "Range", field: "rate" },
     ];
     url =
       process.env.REACT_APP_API_URL +
@@ -327,18 +253,20 @@ export const setData = (platform, type, email) => (dispatch) => {
       fields: ["minSp", "rate"],
       onSubmit: addFixedFees,
     };
-    actions = [{
-      icon: "add",
-      tooltip: "Add Fixed Fees",
-      isFreeAction: true,
-      onClick: (event) =>
-        new Promise((resolve, reject) => {
-          setTimeout(() => {
-            dispatch(setAlert(true, form));
-            resolve();
-          }, 1000);
-        }),
-    }, ];
+    actions = [
+      {
+        icon: "add",
+        tooltip: "Add Fixed Fees",
+        isFreeAction: true,
+        onClick: (event) =>
+          new Promise((resolve, reject) => {
+            setTimeout(() => {
+              dispatch(setAlert(true, form));
+              resolve();
+            }, 1000);
+          }),
+      },
+    ];
     editable = {
       onRowUpdate: (newData, oldData) =>
         new Promise((resolve, reject) => {
@@ -357,18 +285,10 @@ export const setData = (platform, type, email) => (dispatch) => {
     };
   }
   if (type === "Information" && platform === "user") {
-    column = [{
-        title: "Name",
-        field: "name"
-      },
-      {
-        title: "Email",
-        field: "email"
-      },
-      {
-        title: "Mobile Number",
-        field: "mobile_no"
-      },
+    column = [
+      { title: "Name", field: "name" },
+      { title: "Email", field: "email" },
+      { title: "Mobile Number", field: "mobile_no" },
     ];
     url =
       process.env.REACT_APP_API_URL +
@@ -380,18 +300,20 @@ export const setData = (platform, type, email) => (dispatch) => {
       fields: ["name", "email", "mobile_no", "password"],
       onSubmit: addUser,
     };
-    actions = [{
-      icon: "add",
-      tooltip: "Add User",
-      isFreeAction: true,
-      onClick: (event) =>
-        new Promise((resolve, reject) => {
-          setTimeout(() => {
-            dispatch(setAlert(true, form));
-            resolve();
-          }, 1000);
-        }),
-    }, ];
+    actions = [
+      {
+        icon: "add",
+        tooltip: "Add User",
+        isFreeAction: true,
+        onClick: (event) =>
+          new Promise((resolve, reject) => {
+            setTimeout(() => {
+              dispatch(setAlert(true, form));
+              resolve();
+            }, 1000);
+          }),
+      },
+    ];
     editable = {
       onRowDelete: (oldData) =>
         new Promise((resolve, reject) => {
@@ -403,31 +325,13 @@ export const setData = (platform, type, email) => (dispatch) => {
     };
   }
   if (type === "Collection Fees") {
-    column = [{
-        title: "Min",
-        field: "minSp",
-        editable: "onAdd"
-      },
-      {
-        title: "Max",
-        field: "maxSp"
-      },
-      {
-        title: "Post Paid %",
-        field: "postPaidPercentage"
-      },
-      {
-        title: "Post Paid \u20B9",
-        field: "postPaidRuppee"
-      },
-      {
-        title: "Pre Paid %",
-        field: "prePaidPercentage"
-      },
-      {
-        title: "Pre Paid \u20B9",
-        field: "prePaidRuppee"
-      },
+    column = [
+      { title: "Min", field: "minSp", editable: "onAdd" },
+      { title: "Max", field: "maxSp" },
+      { title: "Post Paid %", field: "postPaidPercentage" },
+      { title: "Post Paid \u20B9", field: "postPaidRuppee" },
+      { title: "Pre Paid %", field: "prePaidPercentage" },
+      { title: "Pre Paid \u20B9", field: "prePaidRuppee" },
     ];
     url =
       process.env.REACT_APP_API_URL +
@@ -448,18 +352,20 @@ export const setData = (platform, type, email) => (dispatch) => {
       ],
       onSubmit: addCollectionFees,
     };
-    actions = [{
-      icon: "add",
-      tooltip: "Add Collection Fees",
-      isFreeAction: true,
-      onClick: (event) =>
-        new Promise((resolve, reject) => {
-          setTimeout(() => {
-            dispatch(setAlert(true, form));
-            resolve();
-          }, 1000);
-        }),
-    }, ];
+    actions = [
+      {
+        icon: "add",
+        tooltip: "Add Collection Fees",
+        isFreeAction: true,
+        onClick: (event) =>
+          new Promise((resolve, reject) => {
+            setTimeout(() => {
+              dispatch(setAlert(true, form));
+              resolve();
+            }, 1000);
+          }),
+      },
+    ];
     editable = {
       onRowUpdate: (newData, oldData) =>
         new Promise((resolve, reject) => {
@@ -478,28 +384,12 @@ export const setData = (platform, type, email) => (dispatch) => {
     };
   }
   if (type === "Referral") {
-    column = [{
-        title: "Category",
-        field: "category",
-        editable: "onAdd"
-      },
-      {
-        title: "Subcategory",
-        field: "subcategory",
-        editable: "onAdd"
-      },
-      {
-        title: "Partition Amount",
-        field: "partitionAmount"
-      },
-      {
-        title: "Primary Commission",
-        field: "primaryCommission"
-      },
-      {
-        title: "Secondary Commission",
-        field: "secondaryCommission"
-      },
+    column = [
+      { title: "Category", field: "category", editable: "onAdd" },
+      { title: "Subcategory", field: "subcategory", editable: "onAdd" },
+      { title: "Partition Amount", field: "partitionAmount" },
+      { title: "Primary Commission", field: "primaryCommission" },
+      { title: "Secondary Commission", field: "secondaryCommission" },
     ];
     url =
       process.env.REACT_APP_API_URL +
@@ -519,18 +409,20 @@ export const setData = (platform, type, email) => (dispatch) => {
       ],
       onSubmit: addReferral,
     };
-    actions = [{
-      icon: "add",
-      tooltip: "Add Referral",
-      isFreeAction: true,
-      onClick: (event) =>
-        new Promise((resolve, reject) => {
-          setTimeout(() => {
-            dispatch(setAlert(true, form));
-            resolve();
-          }, 1000);
-        }),
-    }, ];
+    actions = [
+      {
+        icon: "add",
+        tooltip: "Add Referral",
+        isFreeAction: true,
+        onClick: (event) =>
+          new Promise((resolve, reject) => {
+            setTimeout(() => {
+              dispatch(setAlert(true, form));
+              resolve();
+            }, 1000);
+          }),
+      },
+    ];
     editable = {
       onRowUpdate: (newData, oldData) =>
         new Promise((resolve, reject) => {
@@ -549,15 +441,9 @@ export const setData = (platform, type, email) => (dispatch) => {
     };
   }
   if (type === "Closing Fees") {
-    column = [{
-        title: "Min",
-        field: "minSp",
-        editable: "onAdd"
-      },
-      {
-        title: "Max",
-        field: "maxSp"
-      },
+    column = [
+      { title: "Min", field: "minSp", editable: "onAdd" },
+      { title: "Max", field: "maxSp" },
     ];
     let form = {
       set: true,
@@ -567,23 +453,15 @@ export const setData = (platform, type, email) => (dispatch) => {
       onSubmit: addClosingFees,
     };
     if (platform === "amazon") {
-      column.push({
-        title: "Easy Ship Non Prime",
-        field: "easyShipNonPrime"
-      }, {
-        title: "Easy Ship Prime",
-        field: "easyShipPrime"
-      }, {
-        title: "Self Ship",
-        field: "selfShip"
-      });
+      column.push(
+        { title: "Easy Ship Non Prime", field: "easyShipNonPrime" },
+        { title: "Easy Ship Prime", field: "easyShipPrime" },
+        { title: "Self Ship", field: "selfShip" }
+      );
       form.fields.push("easyShipNonPrime", "easyShipPrime", "selfShip");
     }
     if (platform === "amazonFba") {
-      column.push({
-        title: "FBA",
-        field: "fba"
-      });
+      column.push({ title: "FBA", field: "fba" });
       form.fields.push("fba");
     }
     url =
@@ -591,18 +469,20 @@ export const setData = (platform, type, email) => (dispatch) => {
       "api/MPC/" +
       platform +
       "/admin/closingFees/getAll";
-    actions = [{
-      icon: "add",
-      tooltip: "Add Closing Fees",
-      isFreeAction: true,
-      onClick: (event) =>
-        new Promise((resolve, reject) => {
-          setTimeout(() => {
-            dispatch(setAlert(true, form));
-            resolve();
-          }, 1000);
-        }),
-    }, ];
+    actions = [
+      {
+        icon: "add",
+        tooltip: "Add Closing Fees",
+        isFreeAction: true,
+        onClick: (event) =>
+          new Promise((resolve, reject) => {
+            setTimeout(() => {
+              dispatch(setAlert(true, form));
+              resolve();
+            }, 1000);
+          }),
+      },
+    ];
     editable = {
       onRowUpdate: (newData, oldData) =>
         new Promise((resolve, reject) => {
@@ -621,36 +501,14 @@ export const setData = (platform, type, email) => (dispatch) => {
     };
   }
   if (type === "Fulfillment Fees") {
-    column = [{
-        title: "Category",
-        field: "category",
-        editable: "onAdd"
-      },
-      {
-        title: "Subcategory",
-        field: "subcategory",
-        editable: "onAdd"
-      },
-      {
-        title: "Local Shipping Fees",
-        field: "localShippingFees"
-      },
-      {
-        title: "Regional Shipping Fees",
-        field: "regionalShippingFees"
-      },
-      {
-        title: "National Shipping Fees",
-        field: "nationalShippingFees"
-      },
-      {
-        title: "Pick And Pack Fees",
-        field: "pickAndPackFees"
-      },
-      {
-        title: "Storing Fees",
-        field: "storingFees"
-      },
+    column = [
+      { title: "Category", field: "category", editable: "onAdd" },
+      { title: "Subcategory", field: "subcategory", editable: "onAdd" },
+      { title: "Local Shipping Fees", field: "localShippingFees" },
+      { title: "Regional Shipping Fees", field: "regionalShippingFees" },
+      { title: "National Shipping Fees", field: "nationalShippingFees" },
+      { title: "Pick And Pack Fees", field: "pickAndPackFees" },
+      { title: "Storing Fees", field: "storingFees" },
     ];
     let form = {
       set: true,
@@ -671,18 +529,20 @@ export const setData = (platform, type, email) => (dispatch) => {
       "api/MPC/" +
       platform +
       "/admin/fulfillment/getAll";
-    actions = [{
-      icon: "add",
-      tooltip: "Add Closing Fees",
-      isFreeAction: true,
-      onClick: (event) =>
-        new Promise((resolve, reject) => {
-          setTimeout(() => {
-            dispatch(setAlert(true, form));
-            resolve();
-          }, 1000);
-        }),
-    }, ];
+    actions = [
+      {
+        icon: "add",
+        tooltip: "Add Closing Fees",
+        isFreeAction: true,
+        onClick: (event) =>
+          new Promise((resolve, reject) => {
+            setTimeout(() => {
+              dispatch(setAlert(true, form));
+              resolve();
+            }, 1000);
+          }),
+      },
+    ];
     editable = {
       onRowUpdate: (newData, oldData) =>
         new Promise((resolve, reject) => {
@@ -694,12 +554,12 @@ export const setData = (platform, type, email) => (dispatch) => {
     };
   }
   fetch(url, {
-      method: "GET",
-      headers: {
-        "content-type": "application/json",
-        "x-auth": localStorage.getItem("token"),
-      }
-    })
+    method: "GET",
+    headers: {
+      "content-type": "application/json",
+      "x-auth": localStorage.getItem("token"),
+    }
+  })
     .then(async function (response) {
       if (!response.ok && parseInt(response.status) !== 401) {
         let data = await response.json();
@@ -711,15 +571,10 @@ export const setData = (platform, type, email) => (dispatch) => {
       return response.json();
     })
     .then((data) => {
-      if (email !== undefined) data = data.title
+      if(email!==undefined) data = data.title
       dispatch({
         type: SET_DATA,
-        payload: {
-          column,
-          data,
-          editable,
-          actions
-        },
+        payload: { column, data, editable, actions },
       });
     })
     .catch((err) => toast.error(err.message));

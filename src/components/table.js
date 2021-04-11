@@ -24,8 +24,9 @@ function Table(props) {
   const table = useSelector((state) => state.table);
   useEffect(() => {
     dispatch(removeData());
-    var email = new URLSearchParams(props.location.search).get("email")
-    dispatch(setData(params.platform, props.type , email));
+    // var email = new URLSearchParams(props.location.search).get("email")
+    // if(email!==undefined) dispatch(setData(params.platform, props.type , email));
+     dispatch(setData(params.platform, props.type));
   }, [dispatch, params.platform, props.type, props.location.search]);
 
   return (
