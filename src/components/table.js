@@ -16,7 +16,7 @@ function Table(props) {
   const classes = useStyles();
 
   const handleClick = (event,rowData) => {
-    props.history.push('./'+event.target.innerHTML+"?email="+rowData.email);
+    props.history.push('./'+event.target.innerHTML+"/"+rowData.email);
   };
 
   let params = useParams();
@@ -24,10 +24,8 @@ function Table(props) {
   const table = useSelector((state) => state.table);
   useEffect(() => {
     dispatch(removeData());
-    // var email = new URLSearchParams(props.location.search).get("email")
-    // if(email!==undefined) dispatch(setData(params.platform, props.type , email));
-     dispatch(setData(params.platform, props.type));
-  }, [dispatch, params.platform, props.type, props.location.search]);
+    dispatch(setData(params.platform, props.type , params.email));
+  }, [dispatch, params.email, params.platform, props.type]);
 
   return (
     <MaterialTable
