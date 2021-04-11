@@ -21,6 +21,7 @@ import {
 } from "./closingfees";
 import { addFulfillmentFees, updateFulfillmentFees } from "./fulfillmentfees";
 import { addUser, deleteUser } from "./user";
+import { deleteCalculation } from "./calculation";
 
 export const setData = (platform, type, email) => (dispatch) => {
   let column = [];
@@ -36,7 +37,7 @@ export const setData = (platform, type, email) => (dispatch) => {
       onRowDelete: (oldData) =>
         new Promise((resolve, reject) => {
           setTimeout(() => {
-            dispatch(deleteClosingFees(oldData, platform));
+            dispatch(deleteCalculation(oldData, platform, email));
             resolve();
           }, 1000);
         }),
