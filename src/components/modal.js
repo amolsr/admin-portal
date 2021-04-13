@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { removeAlert } from "../actions/alert";
 import { useSpring, animated } from "react-spring/web.cjs"; // web.cjs is required for IE 11 support
 import Form from "./form";
+import { Grid } from "@material-ui/core";
 
 const Fade = React.forwardRef(function Fade(props, ref) {
   const { in: open, children, onEnter, onExited, ...other } = props;
@@ -85,16 +86,44 @@ export default function TransitionsModal() {
       >
         <Fade in={alert.set}>
           <div className={classes.paper}>
-            <h2 id="transition-modal-title">
+            { alert.type === "form" ? <div>
+              <h2 id="transition-modal-title">
               {alert.form.type + " " + alert.form.page}
             </h2>
             <p id="transition-modal-description">
-              {alert.form.set ? (
-                <Form action={alert.form.type} product={alert.form.page} />
-              ) : (
-                <></>
-              )}
+              <Form action={alert.form.type} product={alert.form.page} />            
             </p>
+            </div> :<></>}
+            { alert.type === "calculation" ? <div>
+            <h2 style={{textAlign:"center"}} id="transition-modal-title">
+              {alert.calculation.title}
+            </h2>
+            <p id="transition-modal-description">
+              <Grid container spacing={5}>
+                <Grid item col={6}>
+                  <h4 style={{width:"15rem"}}>INPUT</h4>
+                {
+               Object.keys(alert.calculation.input).map((key, i) => (
+                 <p key={i}>
+                     <span>{key}: {alert.calculation.input[key]}</span>
+                 </p>
+               ))
+             }
+                </Grid>
+                <Grid item col={6}>
+                <h4 style={{width:"15rem"}}>OUTPUT</h4>
+                {
+               Object.keys(alert.calculation.output).map((key, i) => (
+                 <p key={i}>
+                     <span>{key}: {alert.calculation.output[key]}</span>
+                 </p>
+               ))
+             }
+</Grid>
+                </Grid> 
+           
+            </p>
+            </div> :<></>}
           </div>
         </Fade>
       </Modal>

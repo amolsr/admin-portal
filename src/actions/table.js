@@ -46,9 +46,52 @@ export const setData = (platform, type, email) => (dispatch) => {
       {
         icon: 'info',
         tooltip: 'calculation',
-        onClick: (event, rowData) => {
-          // Do save operation
-        }
+        onClick: (event, rowData) =>
+        new Promise((resolve, reject) => {
+          setTimeout(() => {
+            dispatch(setAlert(true, "calculation", { platform , email , title : rowData.title}));
+            resolve();
+          }, 1000);
+        }),
+        //   /api/users/admin/show/saved/title/data
+        //   {
+        //     "company": "meesho",
+        //       "role":"Admin",
+        //       "email":"abhishekedu4979@gmail.com",
+        //       "title":"pikachu"
+        //   }
+        //   {
+            // "input": {
+            //     "_id": "602d65e1d15fd65930ba1a46",
+            //     "title": "pikachu",
+            //     "category": "Appliances",
+            //     "sellingPrice": 450,
+            //     "gstOnProduct": 5,
+            //     "productPriceWithoutGst": 220,
+            //     "inwardShipping": 0.5,
+            //     "packagingExpense": 8,
+            //     "labour": 2,
+            //     "storageFee": 2,
+            //     "other": 2,
+            //     "discountPercent": 10,
+            //     "discountAmount": 0,
+            //     "date": "02/18/2021"
+            // },
+            // "output": {
+            //     "commissionFees": 8.1,
+            //     "shippingFees": "67.62",
+            //     "CS": "75.72",
+            //     "gstOnCS": "4.84",
+            //     "totalCharges": "80.56",
+            //     "bankSettlement": 382.12,
+            //     "gstClaim": 24.63,
+            //     "gstPayable": 22.67,
+            //     "totalGstPayable": -1.96,
+            //     "tcs": 4.53,
+            //     "profit": 147.62,
+            //     "profitPercentage": 67.1
+            // }
+        // }
       }
     ]
     url = process.env.REACT_APP_API_URL +"api/users/admin/show/saved/title?company="+platform+"&email="+email+"&role=Admin"
@@ -60,7 +103,6 @@ export const setData = (platform, type, email) => (dispatch) => {
       { title: "Commission", field: "commission" },
     ];
     let form = {
-      set: true,
       type: "Add",
       page: type,
       fields: ["category", "commission"],
@@ -75,7 +117,7 @@ export const setData = (platform, type, email) => (dispatch) => {
         onClick: (event) =>
           new Promise((resolve, reject) => {
             setTimeout(() => {
-              dispatch(setAlert(true, form));
+              dispatch(setAlert(true, "form", form));
               resolve();
             }, 1000);
           }),
@@ -127,7 +169,6 @@ export const setData = (platform, type, email) => (dispatch) => {
         { title: "Max", field: "max" },
       ];
       let form = {
-        set: true,
         type: "Add",
         page: type,
         fields: ["type", "field", "value"],
@@ -141,7 +182,7 @@ export const setData = (platform, type, email) => (dispatch) => {
           onClick: (event) =>
             new Promise((resolve, reject) => {
               setTimeout(() => {
-                dispatch(setAlert(true, form));
+                dispatch(setAlert(true, "form", form));
                 resolve();
               }, 1000);
             }),
@@ -156,7 +197,6 @@ export const setData = (platform, type, email) => (dispatch) => {
         { title: "National", field: "national" },
       ];
       let form = {
-        set: true,
         type: "Add",
         page: type,
         fields: ["type", "field", "value"],
@@ -170,7 +210,7 @@ export const setData = (platform, type, email) => (dispatch) => {
           onClick: (event) =>
             new Promise((resolve, reject) => {
               setTimeout(() => {
-                dispatch(setAlert(true, form));
+                dispatch(setAlert(true,"form", form));
                 resolve();
               }, 1000);
             }),
@@ -194,7 +234,6 @@ export const setData = (platform, type, email) => (dispatch) => {
         { title: "National", field: "national" },
       ];
       let form = {
-        set: true,
         type: "Add",
         page: type,
         fields: [
@@ -214,7 +253,7 @@ export const setData = (platform, type, email) => (dispatch) => {
           onClick: (event) =>
             new Promise((resolve, reject) => {
               setTimeout(() => {
-                dispatch(setAlert(true, form));
+                dispatch(setAlert(true,"form", form));
                 resolve();
               }, 1000);
             }),
@@ -248,7 +287,7 @@ export const setData = (platform, type, email) => (dispatch) => {
       platform +
       "/admin/fixedFees/getAll";
     let form = {
-      set: true,
+
       type: "Add",
       page: type,
       fields: ["minSp", "rate"],
@@ -262,7 +301,7 @@ export const setData = (platform, type, email) => (dispatch) => {
         onClick: (event) =>
           new Promise((resolve, reject) => {
             setTimeout(() => {
-              dispatch(setAlert(true, form));
+              dispatch(setAlert(true,"form", form));
               resolve();
             }, 1000);
           }),
@@ -295,7 +334,7 @@ export const setData = (platform, type, email) => (dispatch) => {
       process.env.REACT_APP_API_URL +
       "api/users/admin/read";
     let form = {
-      set: true,
+
       type: "Add",
       page: "User",
       fields: ["name", "email", "mobile_no", "password"],
@@ -309,7 +348,7 @@ export const setData = (platform, type, email) => (dispatch) => {
         onClick: (event) =>
           new Promise((resolve, reject) => {
             setTimeout(() => {
-              dispatch(setAlert(true, form));
+              dispatch(setAlert(true, "form" ,form));
               resolve();
             }, 1000);
           }),
@@ -340,7 +379,6 @@ export const setData = (platform, type, email) => (dispatch) => {
       platform +
       "/admin/collectionFees/getAll";
     let form = {
-      set: true,
       type: "Add",
       page: type,
       fields: [
@@ -361,7 +399,7 @@ export const setData = (platform, type, email) => (dispatch) => {
         onClick: (event) =>
           new Promise((resolve, reject) => {
             setTimeout(() => {
-              dispatch(setAlert(true, form));
+              dispatch(setAlert(true, "form", form));
               resolve();
             }, 1000);
           }),
@@ -398,7 +436,6 @@ export const setData = (platform, type, email) => (dispatch) => {
       platform +
       "/admin/referral/getAll";
     let form = {
-      set: true,
       type: "Add",
       page: type,
       fields: [
@@ -418,7 +455,7 @@ export const setData = (platform, type, email) => (dispatch) => {
         onClick: (event) =>
           new Promise((resolve, reject) => {
             setTimeout(() => {
-              dispatch(setAlert(true, form));
+              dispatch(setAlert(true, "form", form));
               resolve();
             }, 1000);
           }),
@@ -447,7 +484,6 @@ export const setData = (platform, type, email) => (dispatch) => {
       { title: "Max", field: "maxSp" },
     ];
     let form = {
-      set: true,
       type: "Add",
       page: type,
       fields: ["minSp", "maxSp"],
@@ -478,7 +514,7 @@ export const setData = (platform, type, email) => (dispatch) => {
         onClick: (event) =>
           new Promise((resolve, reject) => {
             setTimeout(() => {
-              dispatch(setAlert(true, form));
+              dispatch(setAlert(true, "form", form));
               resolve();
             }, 1000);
           }),
@@ -512,7 +548,6 @@ export const setData = (platform, type, email) => (dispatch) => {
       { title: "Storing Fees", field: "storingFees" },
     ];
     let form = {
-      set: true,
       type: "Add",
       page: type,
       fields: [
@@ -538,7 +573,7 @@ export const setData = (platform, type, email) => (dispatch) => {
         onClick: (event) =>
           new Promise((resolve, reject) => {
             setTimeout(() => {
-              dispatch(setAlert(true, form));
+              dispatch(setAlert(true, "form", form));
               resolve();
             }, 1000);
           }),
