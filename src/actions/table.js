@@ -1,4 +1,5 @@
 import { toast } from "react-toastify";
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {
   addCommission,
   updateCommission,
@@ -49,49 +50,22 @@ export const setData = (platform, type, email) => (dispatch) => {
         onClick: (event, rowData) =>
         new Promise((resolve, reject) => {
           setTimeout(() => {
-            dispatch(setAlert(true, "calculation", { platform , email , title : rowData.title}));
+            dispatch(setAlert(true, "calculation", { platform , email , title : rowData.title, date : rowData.date}));
             resolve();
           }, 1000);
         }),
-        //   /api/users/admin/show/saved/title/data
-        //   {
-        //     "company": "meesho",
-        //       "role":"Admin",
-        //       "email":"abhishekedu4979@gmail.com",
-        //       "title":"pikachu"
-        //   }
-        //   {
-            // "input": {
-            //     "_id": "602d65e1d15fd65930ba1a46",
-            //     "title": "pikachu",
-            //     "category": "Appliances",
-            //     "sellingPrice": 450,
-            //     "gstOnProduct": 5,
-            //     "productPriceWithoutGst": 220,
-            //     "inwardShipping": 0.5,
-            //     "packagingExpense": 8,
-            //     "labour": 2,
-            //     "storageFee": 2,
-            //     "other": 2,
-            //     "discountPercent": 10,
-            //     "discountAmount": 0,
-            //     "date": "02/18/2021"
-            // },
-            // "output": {
-            //     "commissionFees": 8.1,
-            //     "shippingFees": "67.62",
-            //     "CS": "75.72",
-            //     "gstOnCS": "4.84",
-            //     "totalCharges": "80.56",
-            //     "bankSettlement": 382.12,
-            //     "gstClaim": 24.63,
-            //     "gstPayable": 22.67,
-            //     "totalGstPayable": -1.96,
-            //     "tcs": 4.53,
-            //     "profit": 147.62,
-            //     "profitPercentage": 67.1
-            // }
-        // }
+      },
+      {
+        icon: ()=>(<ArrowBackIcon />),
+        tooltip: 'back',
+        isFreeAction: true,
+        onClick: (event, rowData) =>
+        new Promise((resolve, reject) => {
+          setTimeout(() => {
+            window.location = "../user"
+            resolve();
+          }, 1000);
+        }),
       }
     ]
     url = process.env.REACT_APP_API_URL +"api/users/admin/show/saved/title?company="+platform+"&email="+email+"&role=Admin"

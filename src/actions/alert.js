@@ -30,44 +30,10 @@ export const setAlert = (set, type, details) => (dispatch) => {
       .then((data) => {
         dispatch({
           type: SET_ALERT,
-          payload: { set, type , calculation : {title: details.title, input: data.input, output: data.output} },
+          payload: { set, type , calculation : {title: details.title, date: details.date ,input: data.input, output: data.output} },
         });
       })
       .catch((err) => toast.error(err.message));
-      var input = {
-        "_id": "602d65e1d15fd65930ba1a46",
-        "title": "pikachu",
-        "category": "Appliances",
-        "sellingPrice": 450,
-        "gstOnProduct": 5,
-        "productPriceWithoutGst": 220,
-        "inwardShipping": 0.5,
-        "packagingExpense": 8,
-        "labour": 2,
-        "storageFee": 2,
-        "other": 2,
-        "discountPercent": 10,
-        "discountAmount": 0,
-        "date": "02/18/2021"
-    }
-    var output = {
-      "commissionFees": 8.1,
-      "shippingFees": "67.62",
-      "CS": "75.72",
-      "gstOnCS": "4.84",
-      "totalCharges": "80.56",
-      "bankSettlement": 382.12,
-      "gstClaim": 24.63,
-      "gstPayable": 22.67,
-      "totalGstPayable": -1.96,
-      "tcs": 4.53,
-      "profit": 147.62,
-      "profitPercentage": 67.1
-  }
-      dispatch({
-        type: SET_ALERT,
-        payload: { set, type , calculation : {title: details.title ,input,output} },
-      });
   }
 };
 

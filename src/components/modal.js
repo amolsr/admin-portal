@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { removeAlert } from "../actions/alert";
 import { useSpring, animated } from "react-spring/web.cjs"; // web.cjs is required for IE 11 support
 import Form from "./form";
-import { Grid } from "@material-ui/core";
+import { Grid, Paper } from "@material-ui/core";
 
 const Fade = React.forwardRef(function Fade(props, ref) {
   const { in: open, children, onEnter, onExited, ...other } = props;
@@ -87,6 +87,7 @@ export default function TransitionsModal() {
         <Fade in={alert.set}>
           <div className={classes.paper}>
             { alert.type === "form" ? <div>
+              <img src='https://d30y9cdsu7xlg0.cloudfront.net/png/53504-200.png' onClick={handleClose} alt="close" style={{cursor:'pointer', float:'right', marginTop: '2px', width: '20px'}}/>
               <h2 id="transition-modal-title">
               {alert.form.type + " " + alert.form.page}
             </h2>
@@ -95,13 +96,15 @@ export default function TransitionsModal() {
             </p>
             </div> :<></>}
             { alert.type === "calculation" ? <div>
+            <img src='https://d30y9cdsu7xlg0.cloudfront.net/png/53504-200.png' onClick={handleClose} alt="close" style={{cursor:'pointer', float:'right', marginTop: '2px', width: '20px'}}/>
             <h2 style={{textAlign:"center"}} id="transition-modal-title">
-              {alert.calculation.title}
+              {alert.calculation.title} : {alert.calculation.date}
             </h2>
             <p id="transition-modal-description">
               <Grid container spacing={5}>
                 <Grid item col={6}>
                   <h4 style={{width:"15rem"}}>INPUT</h4>
+                  <Paper style={{ maxWidth: 400, maxHeight:400, overflow: 'auto', padding: "0rem 2rem"}}>
                 {
                Object.keys(alert.calculation.input).map((key, i) => (
                  <p key={i}>
@@ -109,16 +112,22 @@ export default function TransitionsModal() {
                  </p>
                ))
              }
+             </Paper>
                 </Grid>
                 <Grid item col={6}>
                 <h4 style={{width:"15rem"}}>OUTPUT</h4>
-                {
+                <Paper style={{ maxWidth: 400, maxHeight:400, overflow: 'auto' , padding: "0rem 2rem"}}>
+  {
                Object.keys(alert.calculation.output).map((key, i) => (
                  <p key={i}>
-                     <span>{key}: {alert.calculation.output[key]}</span>
+                     {key}: <br />{Object.keys(alert.calculation.output[key]).map((key1, j) => (
+                        <><span style={{padding:"2rem"}}> {key1}: {alert.calculation.output[key][key1]} </span> <br /></>
+                     ))}
                  </p>
                ))
              }
+</Paper>
+                
 </Grid>
                 </Grid> 
            
