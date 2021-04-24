@@ -105,33 +105,17 @@ export default function TransitionsModal() {
                 <Grid item col={6}>
                   <h4 style={{width:"15rem"}}>INPUT</h4>
                   <Paper style={{ maxWidth: 400, maxHeight:400, overflow: 'auto', padding: "0rem 2rem"}}>
-                {
-               Object.keys(alert.calculation.input).map((key, i) => (
-                 <p key={i}>
-                     <span>{key}: {alert.calculation.input[key]}</span>
-                 </p>
-               ))
-             }
-             </Paper>
+                    <pre>{JSON.stringify(alert.calculation.input, undefined, 2)}</pre>
+                  </Paper>
                 </Grid>
                 <Grid item col={6}>
-                <h4 style={{width:"15rem"}}>OUTPUT</h4>
-                <Paper style={{ maxWidth: 400, maxHeight:400, overflow: 'auto' , padding: "0rem 2rem"}}>
-  {
-               Object.keys(alert.calculation.output).map((key, i) => (
-                 <p key={i}>
-                     {key}: <br />{Object.keys(alert.calculation.output[key]).map((key1, j) => (
-                        <><span style={{padding:"2rem"}}> {key1}: {alert.calculation.output[key][key1]} </span> <br /></>
-                     ))}
-                 </p>
-               ))
-             }
-</Paper>
-                
-</Grid>
-                </Grid> 
-           
-            </p>
+                  <h4 style={{width:"15rem"}}>OUTPUT</h4>
+                    <Paper style={{ maxWidth: 400, maxHeight:400, overflow: 'auto' , padding: "0rem 2rem"}}>
+                        <pre>{JSON.stringify(alert.calculation.output, undefined, 2)}</pre>
+                    </Paper>
+                  </Grid>
+              </Grid> 
+              </p>
             </div> :<></>}
           </div>
         </Fade>

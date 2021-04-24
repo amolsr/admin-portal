@@ -14,11 +14,10 @@ import Box from '@material-ui/core/Box';
 
 function Table(props) {
   const classes = useStyles();
-
+  const tableRef = React.createRef();
   const handleClick = (event,rowData) => {
     props.history.push('./'+event.target.innerHTML+"/"+rowData.email);
   };
-
   let params = useParams();
   const dispatch = useDispatch();
   const table = useSelector((state) => state.table);
@@ -26,11 +25,19 @@ function Table(props) {
     dispatch(removeData());
     dispatch(setData(params.platform, props.type , params.email));
   }, [dispatch, params.email, params.platform, props.type]);
+  useEffect(() => {
+    if (tableRef.current){
+      tableRef.current.setState({ searchText: "" });
+      tableRef.current.dataManager.changeSearchText("");
+      console.log(tableRef.current);
+    }
+  }, [tableRef]);
 
   return (
     <MaterialTable
       title={(params.platform ? params.platform.toUpperCase() + " " + props.type.toUpperCase() : props.type.toUpperCase())}
       columns={table.column}
+      tableRef={tableRef}
       data={table.data}
       editable={table.editable}
       actions={table.actions}
@@ -61,7 +68,6 @@ function Table(props) {
           
       }})}
       
-     
       options={{
         paging: false,
         actionsColumnIndex: -1,
