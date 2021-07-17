@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/admin-portal/static/css/main.ab7136cd.chunk.css",
-    "main.js": "/admin-portal/static/js/main.51f4815f.chunk.js",
-    "main.js.map": "/admin-portal/static/js/main.51f4815f.chunk.js.map",
+    "main.js": "/admin-portal/static/js/main.edb3e13c.chunk.js",
+    "main.js.map": "/admin-portal/static/js/main.edb3e13c.chunk.js.map",
     "runtime-main.js": "/admin-portal/static/js/runtime-main.1f8f1e0e.js",
     "runtime-main.js.map": "/admin-portal/static/js/runtime-main.1f8f1e0e.js.map",
     "static/css/2.24192d93.chunk.css": "/admin-portal/static/css/2.24192d93.chunk.css",
-    "static/js/2.32790537.chunk.js": "/admin-portal/static/js/2.32790537.chunk.js",
-    "static/js/2.32790537.chunk.js.map": "/admin-portal/static/js/2.32790537.chunk.js.map",
+    "static/js/2.fd4ffae1.chunk.js": "/admin-portal/static/js/2.fd4ffae1.chunk.js",
+    "static/js/2.fd4ffae1.chunk.js.map": "/admin-portal/static/js/2.fd4ffae1.chunk.js.map",
     "static/js/3.4076e39e.chunk.js": "/admin-portal/static/js/3.4076e39e.chunk.js",
     "static/js/3.4076e39e.chunk.js.map": "/admin-portal/static/js/3.4076e39e.chunk.js.map",
     "static/js/4.1acd434b.chunk.js": "/admin-portal/static/js/4.1acd434b.chunk.js",
@@ -17,7 +17,7 @@
     "index.html": "/admin-portal/index.html",
     "static/css/2.24192d93.chunk.css.map": "/admin-portal/static/css/2.24192d93.chunk.css.map",
     "static/css/main.ab7136cd.chunk.css.map": "/admin-portal/static/css/main.ab7136cd.chunk.css.map",
-    "static/js/2.32790537.chunk.js.LICENSE.txt": "/admin-portal/static/js/2.32790537.chunk.js.LICENSE.txt",
+    "static/js/2.fd4ffae1.chunk.js.LICENSE.txt": "/admin-portal/static/js/2.fd4ffae1.chunk.js.LICENSE.txt",
     "static/js/3.4076e39e.chunk.js.LICENSE.txt": "/admin-portal/static/js/3.4076e39e.chunk.js.LICENSE.txt",
     "static/js/4.1acd434b.chunk.js.LICENSE.txt": "/admin-portal/static/js/4.1acd434b.chunk.js.LICENSE.txt",
     "static/js/5.0f5f73f5.chunk.js.LICENSE.txt": "/admin-portal/static/js/5.0f5f73f5.chunk.js.LICENSE.txt"
@@ -25,8 +25,8 @@
   "entrypoints": [
     "static/js/runtime-main.1f8f1e0e.js",
     "static/css/2.24192d93.chunk.css",
-    "static/js/2.32790537.chunk.js",
+    "static/js/2.fd4ffae1.chunk.js",
     "static/css/main.ab7136cd.chunk.css",
-    "static/js/main.51f4815f.chunk.js"
+    "static/js/main.edb3e13c.chunk.js"
   ]
 }
