@@ -40,7 +40,7 @@ export default function Main() {
       alignItems="center"
     >
       {/* Recent Deposits */}
-      <Grid item xs={12} md={4} lg={4}>
+      <Grid item xs={12} md={3} lg={3}>
         <Paper className={fixedHeightPaper}>
           {" "}
           <img
@@ -50,7 +50,27 @@ export default function Main() {
           />
         </Paper>
       </Grid>
-      <Grid item xs={12} md={4} lg={4}>
+      <Grid item xs={12} md={3} lg={3}>
+        <Paper className={fixedHeightPaper}>
+          {" "}
+          <img
+            className={classes.img1}
+            src={`${process.env.PUBLIC_URL}/image/meesho@2x.png`}
+            alt="meesho"
+          />
+        </Paper>
+      </Grid>
+      <Grid item xs={12} md={3} lg={3}>
+        <Paper className={fixedHeightPaper}>
+          {" "}
+          <img
+            className={classes.img1}
+            src={`${process.env.PUBLIC_URL}/image/meesho@2x.png`}
+            alt="meesho"
+          />
+        </Paper>
+      </Grid>
+      <Grid item xs={12} md={3} lg={3}>
         <Paper className={fixedHeightPaper}>
           {" "}
           <img
@@ -60,7 +80,7 @@ export default function Main() {
           />
         </Paper>
       </Grid>
-      <Grid item xs={12} md={4} lg={4}>
+      <Grid item xs={12} md={3} lg={3}>
         <Paper className={fixedHeightPaper}>
           {" "}
           <img
@@ -70,7 +90,7 @@ export default function Main() {
           />
         </Paper>
       </Grid>
-      <Grid item xs={12} md={4} lg={4}>
+      <Grid item xs={12} md={3} lg={3}>
         <Paper className={fixedHeightPaper}>
           {" "}
           <img
@@ -80,7 +100,7 @@ export default function Main() {
           />
         </Paper>
       </Grid>
-      <Grid item xs={12} md={4} lg={4}>
+      <Grid item xs={12} md={3} lg={3}>
         <Paper className={fixedHeightPaper}>
           {" "}
           <img
