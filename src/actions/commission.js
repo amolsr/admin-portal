@@ -5,7 +5,7 @@ import { ADD_PRODUCT, DELETE_PRODUCT, UPDATE_PRODUCT } from "./types";
 export const addCommission = (newProduct, platform) => (dispatch) => {
   let body = {
     category: newProduct.category,
-    commission: newProduct.commission,
+    commission: parseInt(newProduct.commission),
   }
   if (platform === "meesho") {
     body.subcategory = newProduct.subcategory
@@ -93,7 +93,7 @@ export const updateCommission = (oldProduct, newProduct, platform) => (
 ) => {
   let body = {
     category: newProduct.category,
-    commission: newProduct.commission,
+    commission: parseInt(newProduct.commission),
   }
   if (platform === "meesho") {
     body.subcategory = newProduct.subcategory
