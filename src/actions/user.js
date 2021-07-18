@@ -68,3 +68,35 @@ export const deleteUser = (oldProduct, platform) => (dispatch) => {
             toast.error(err.message);
         });
 };
+
+export const disableUser = (user, platform) => (dispatch) => {
+    console.log(user)
+    fetch(
+        process.env.REACT_APP_API_URL +
+        "api/users/admin/active-inactive/" + user.userId,
+        {
+            method: "GET",
+            headers: {
+                "content-type": "application/json",
+                "x-auth": localStorage.getItem("token"),
+            },
+        }
+    )
+        .then(async function (response) {
+            if (!response.ok) {
+                let data = await response.json();
+                throw new Error(data.message);
+            }
+            return response.json();
+        })
+        .then((data) => {
+            toast.success(data.message);
+            dispatch({
+                type: DELETE_PRODUCT,
+                payload: {},
+            });
+        })
+        .catch((err) => {
+            toast.error(err.message);
+        });
+};

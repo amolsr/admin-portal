@@ -21,7 +21,7 @@ import {
   updateClosingFees,
 } from "./closingfees";
 import { addFulfillmentFees, updateFulfillmentFees } from "./fulfillmentfees";
-import { addUser, deleteUser } from "./user";
+import { addUser, deleteUser, disableUser } from "./user";
 import { deleteCalculation } from "./calculation";
 
 export const setData = (platform, type, email) => (dispatch) => {
@@ -73,7 +73,7 @@ export const setData = (platform, type, email) => (dispatch) => {
 
   if (type === "Commission") {
     column = [
-      { title: '#', field: 'tableData.id', render: rowData => { return (<p>{rowData.tableData.id + 1}</p>) }, width: "5%" },
+      { title: '#', field: 'tableData.id', render: rowData => { return (<p>{rowData.tableData.id + 1}</p>) }, width: "5%", editable: "onAdd" },
       { title: "Category", field: "category", editable: "onAdd" }
     ];
     let form = {
@@ -304,7 +304,7 @@ export const setData = (platform, type, email) => (dispatch) => {
   }
   if (type === "Information" && (platform === "user" || platform === "activeuser")) {
     column = [
-      { title: '#', field: 'tableData.id', render: rowData => { return (<p>{rowData.tableData.id + 1}</p>) } },
+      { title: '#', field: 'tableData.id', render: rowData => { return (<p>{rowData.tableData.id + 1}</p>) }, editable: "onAdd" },
       { title: "Name", field: "name" },
       { title: "Email", field: "email" },
       { title: "Mobile Number", field: "mobile_no" },
@@ -336,6 +336,17 @@ export const setData = (platform, type, email) => (dispatch) => {
           new Promise((resolve, reject) => {
             setTimeout(() => {
               dispatch(setAlert(true, "form", form));
+              resolve();
+            }, 1000);
+          }),
+      },
+      {
+        icon: "delete",
+        tooltip: "Disable User",
+        onClick: (event, row) =>
+          new Promise((resolve, reject) => {
+            setTimeout(() => {
+              dispatch(disableUser(row, platform));
               resolve();
             }, 1000);
           }),
@@ -411,7 +422,7 @@ export const setData = (platform, type, email) => (dispatch) => {
   }
   if (type === "Referral") {
     column = [
-      { title: '#', field: 'tableData.id', render: rowData => { return (<p>{rowData.tableData.id + 1}</p>) }, width: "5%" },
+      { title: '#', field: 'tableData.id', render: rowData => { return (<p>{rowData.tableData.id + 1}</p>) }, width: "5%", editable: "onAdd" },
       { title: "Category", field: "category", editable: "onAdd" },
       { title: "Subcategory", field: "subcategory", editable: "onAdd" },
       { title: "Partition Amount", field: "partitionAmount" },

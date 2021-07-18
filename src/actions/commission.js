@@ -93,7 +93,7 @@ export const updateCommission = (oldProduct, newProduct, platform) => (
 ) => {
   let body = {
     category: newProduct.category,
-    commission: parseInt(newProduct.commission),
+    newCommission: parseInt(newProduct.commission),
   }
   if (platform === "meesho") {
     body.subcategory = newProduct.subcategory
