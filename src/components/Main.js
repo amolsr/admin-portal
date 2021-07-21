@@ -74,7 +74,7 @@ export default function Main(props) {
           {" "}
           <img
             className={classes.img1}
-            src={`${process.env.PUBLIC_URL}/image/${e.platform}.png`}
+            src={`${process.env.PUBLIC_URL}/image/${e.platform}.svg`}
             alt="meesho"
           />
           <Typography variant="h6" >
