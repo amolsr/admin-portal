@@ -1,7 +1,7 @@
 import { toast } from "react-toastify";
 import { removeAlert } from "./alert";
 import { setData } from "./table";
-import { DELETE_PRODUCT } from "./types";
+import { DELETE_PRODUCT, UPDATE_PRODUCT } from "./types";
 
 export const addUser = (newProduct) => (dispatch) => {
     fetch(
@@ -92,8 +92,13 @@ export const disableUser = (user, platform) => (dispatch) => {
         .then((data) => {
             toast.success(data.message);
             dispatch({
-                type: DELETE_PRODUCT,
-                payload: {},
+                type: UPDATE_PRODUCT,
+                payload: {
+                    newProduct: {
+                        ...user, is_active: !user.is_active
+                    },
+                    oldProduct: user,
+                },
             });
         })
         .catch((err) => {
