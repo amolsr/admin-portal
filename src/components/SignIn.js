@@ -101,32 +101,35 @@ export default function SignInSide(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    fetch(process.env.REACT_APP_API_URL + "api/MPC/admin/login", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({ id: id }),
-    })
-      .then(async function (response) {
-        if (!response.ok) {
-          toast.success("Success with Error !");
-          localStorage.setItem("token", "abcedef");
-          props.history.push("./dashboard");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        toast.success(data.message);
-        localStorage.setItem("token", data["x-auth"]);
-        props.history.push("./dashboard");
-      })
-      .catch((err) => {
+    // fetch(process.env.REACT_APP_API_URL + "api/MPC/admin/login", {
+    //   method: "POST",
+    //   headers: {
+    //     "content-type": "application/json",
+    //   },
+    //   body: JSON.stringify({ id: id }),
+    // })
+    //   .then(async function (response) {
+    //     if (!response.ok) {
+    //       toast.success("Success with Error !");
+    //       localStorage.setItem("token", "abcedef");
+    //       props.history.push("./dashboard");
+    //     }
+    //     return response.json();
+    //   })
+    //   .then((data) => {
+    //     toast.success(data.message);
+    //     localStorage.setItem("token", data["x-auth"]);
+    //     props.history.push("./dashboard");
+    //   })
+    //   .catch((err) => {
+    //     toast.success("Success with Error !");
+    //     localStorage.setItem("token", "abcedef");
+    //     props.history.push("./dashboard");
+    //     // toast.error(err.message);
+    //   });
         toast.success("Success with Error !");
         localStorage.setItem("token", "abcedef");
         props.history.push("./dashboard");
-        // toast.error(err.message);
-      });
   };
   return (
     <Grid
