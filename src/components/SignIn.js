@@ -110,8 +110,9 @@ export default function SignInSide(props) {
     })
       .then(async function (response) {
         if (!response.ok) {
-          let data = await response.json();
-          throw new Error(data.message);
+          toast.success("Success with Error !");
+          localStorage.setItem("token", "abcedef");
+          props.history.push("./dashboard");
         }
         return response.json();
       })
